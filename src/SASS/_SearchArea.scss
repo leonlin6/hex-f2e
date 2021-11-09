@@ -1,0 +1,118 @@
+.container{
+    .wrap{
+        width:1280px;
+        padding:20px;
+        margin: 0px auto;
+        background-color: white ;   
+        position:relative;
+        z-index: 2;
+        .searchWrap{
+            background: no-repeat url(../images/search-area-background.png);    
+            height: 536px;
+            margin: 0px auto;
+            background-size: Cover ; 
+            align-items: center;
+            padding: 183px 400px 0px 400px;
+
+            .title{
+                font-size: 50px;
+                padding:0px;
+                margin:0px;
+                display:block;
+                color: white;
+
+            }
+            .description{
+                color:white;
+                margin-bottom:16px;
+            }
+            .searchArea{
+                .keyWordArea{
+                    display:inline-flex;
+                    margin-bottom:6px;
+                    .keyWord{
+                        height:40px;
+                        width:445px;
+                        padding:8.5px 0px 8.5px 24px;
+                        border: none;
+                        border-radius: 6px;
+                        &:focus{
+                            outline:none;
+                        }
+                    }
+                    .searchIcon{
+                        cursor: pointer;
+                        background-color: $attractionsTheme ;          
+                        height:40px;       
+                        width:40px;   
+                        display:inline-flex;
+                        align-items: center;                                
+                        border-radius: 6px;
+                        justify-content: center;
+                        margin-left:6px;
+                    }
+                }
+                .classArea{
+                    display:inline-flex;
+                    .classSearch{                
+                        width:445px;
+                        display:inline-flex;
+                        .dropdown{
+                            width: 220px;
+                            margin-right:7px;
+                            height:40px;
+                            padding:8.5px 0px 8.5px 24px;
+                            background-color: white ;       
+                            border-radius: 6px;
+                        }
+                    }
+                    .searchIcon{
+                        cursor: pointer;
+                        background-color: $foodTheme ;          
+                        height:40px;       
+                        width:40px;   
+                        display:inline-flex;
+                        align-items: center;                                
+                        border-radius: 6px;
+                        justify-content: center;
+                        margin-left:6px;
+                    }
+
+                }
+            }
+        }
+    }
+    .searchShadow{
+        position: relative;
+        justify-content: space-between;
+        width: 1280px;    
+        margin: 0px auto;
+        background-color: #E5E5E5;
+        z-index:1;
+        .shadow{
+            &:first-child{
+                position: absolute;   
+                top:-30px;
+                left: 2px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  #0D0B0C transparent  transparent  transparent;
+                border-style: solid;
+                border-width: 52px 640px 0 0;
+            }
+            &:last-child{
+                position: absolute;
+                top:-30px;
+                right:3px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  transparent #0D0B0C transparent transparent;
+                border-style: solid;
+                border-width: 0px 640px 52px 0;
+            }
+
+        }
+    }
+}

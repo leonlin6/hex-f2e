@@ -1,0 +1,209 @@
+.mainActivities{
+    width: 1280px;
+    margin:0px auto;
+    margin-top:30px;
+    padding: 50px 107px;
+    background-color: #F6F7FB;
+    z-index: 1; 
+    .title{
+        font-size: 20px;
+        margin-bottom:13px;
+        .icon{
+            width:0px;
+            height:0px; 
+            margin-right: 14px;
+            border: solid;
+            border-width: 0px 10px 16px 10px ;
+            border-color: transparent transparent red transparent; 
+            display:inline-block;
+        }
+    }
+    .activities{    
+        z-index: 1;  
+        display: flex;  
+        justify-content: space-between;
+        flex-wrap:wrap;
+        .activityWrap{
+            margin-bottom:48px;
+            .activity{   
+                position:relative;  
+                width: 522px;
+                z-index: 3;
+                background-color: white;
+                display:flex;      
+                padding:16px;     
+                .image{
+                    margin-right:16px;
+                    img{
+                        width: 187px;
+                        height:196px;
+                    }
+                }
+                .content{                
+                    display:flex;
+                    flex-direction: column;
+                    width:278px;
+                    .name{
+                        font-size: 16px;
+                    }
+                    .description{
+                        color:#ACACAC;
+                        font-weight: 400;
+                        line-height: 21px;
+                        p{
+                            display:-webkit-box;
+                            height:102px;
+                            width:278px;
+                            text-overflow: ellipsis; 
+                            white-space:normal;
+                            overflow:hidden;
+                            -webkit-line-clamp: 5;
+                            -webkit-box-orient: vertical;
+                        }
+                        
+                    }
+                    .detailArea{
+                        display: flex;
+                        justify-content: space-between;
+                        flex-direction: row;
+                        align-items: center;
+                        .location{
+                            img{
+                                margin-right:6px;
+                            }
+                        }
+                        .infomation{
+                            border: 1px solid $attractionsTheme;
+                            color:$attractionsTheme;
+                            border-radius: 6px;
+                            display: flex;
+                            justify-content: center;
+                            padding:10px 20px;
+                            cursor:pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .searchShadow{
+            width: 522px;
+            position: relative;
+            .shadow{
+                &:first-child{
+                    position: absolute;   
+                    z-index:2;         
+                    top:-30px;
+                    left: 2px;
+                    background-color: #E5E5E5;
+                    opacity: 0.3;
+                    filter: blur(3px);
+                    border-color:  #0D0B0C transparent  transparent  transparent;
+                    border-style: solid;
+                    border-width: 52px 520px 0 0;
+                }
+                &:last-child{
+                    position: absolute;
+                    z-index:2;
+                    top:-30px;
+                    right:3px;
+                    background-color: #E5E5E5;
+                    opacity: 0.3;
+                    filter: blur(3px);
+                    border-color:  transparent #0D0B0C transparent transparent;
+                    border-style: solid;
+                    border-width: 0px 520px 52px 0;
+                }
+        
+            }
+        }
+    }
+}
+
+.mainFood{
+    width: 1280px;
+    margin:0px auto;
+    margin-top:30px;
+    padding: 50px 107px;
+    background-color: #F6F7FB;
+    z-index: 1; 
+    .title{
+        font-size: 20px;
+        margin-bottom:13px;
+        .icon{
+            width:20px;
+            height:20px; 
+            margin-right: 14px;
+            background-color: $foodTheme;
+            display:inline-block;
+        }
+    }
+    .activities{    
+        z-index: 1;  
+        display: flex;  
+        justify-content: space-between;
+        flex-wrap:wrap;
+        .activityWrap{
+            margin-bottom:48px;
+            .activity{   
+                position:relative;  
+                width: 206px;
+                z-index: 3;
+                background-color: white;
+                display:flex;  
+                justify-content: space-between;
+                flex-direction: column;    
+                padding:16px;     
+                .image{
+                    margin-right:16px;
+                    img{
+                        width: 182px;
+                        height:137px;
+                    }
+                }
+                .name{
+                    font-size: 16px;
+                    margin-top: 10px;
+                    width: 181px;
+                    height: 42px;
+                }
+                .location{
+                    img{
+                        margin-right:6px;                            
+                    }
+                }
+                           
+            }
+        }
+        .searchShadow{
+            width: 206px;
+            position: relative;
+            .shadow{
+                &:first-child{
+                    position: absolute;   
+                    z-index:2;         
+                    top:-30px;
+                    left: 2px;
+                    background-color: #E5E5E5;
+                    opacity: 0.3;
+                    filter: blur(7px);
+                    border-color:  #0D0B0C transparent  transparent  transparent;
+                    border-style: solid;
+                    border-width: 52px 206px 0 0;
+                }
+                &:last-child{
+                    position: absolute;
+                    z-index:2;
+                    top:-30px;
+                    right:3px;
+                    background-color: #E5E5E5;
+                    opacity: 0.3;
+                    filter: blur(7px);
+                    border-color:  transparent #0D0B0C transparent transparent;
+                    border-style: solid;
+                    border-width: 0px 206px 52px 0;
+                }
+        
+            }
+        }
+    }
+}
