@@ -1,12 +1,13 @@
-import React,{useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
+import CityCarousel from './CityCarousel';
 
 const Activity = ({content,food}) => {
+    const [carouselPage, setCarouselPage] = useState(1);
 
     const addressSlice = (address) => {
-        console.log(address);
-        if(address !== "")
-            return address.slice(0,6);
+        try{return address.slice(0,6);}
+        catch(error){return "";}
     }
 
     useEffect(() => {
@@ -14,7 +15,7 @@ const Activity = ({content,food}) => {
         console.log('content= ', content);
     }, [content, food]);
 
-    if(content === null || food === null){
+    if(content === null){
         return null;
     }
     
@@ -35,7 +36,7 @@ const Activity = ({content,food}) => {
                         <div className="detailArea">
                             <div className="location">
                                 <img alt="subtrcat Icon" src={subtrcatIcon}></img>
-                                {item.Location}
+                                {addressSlice(item.Location)}
                             </div>
                             <div className="infomation">
                                 活動詳情
@@ -50,7 +51,10 @@ const Activity = ({content,food}) => {
             </div>
         );
     });      
-  
+
+    if(food === null){
+        return null;
+    }
     const renderSmallActivity = food.data.map((item, index) => {
         return(
             <div className="activityWrap">
@@ -75,9 +79,25 @@ const Activity = ({content,food}) => {
     });   
 
 
-    if(content !== null){
+    if(food !== null){
         return (
             <div>
+                <div className="mainCity">
+                    <div className="carouselIconPrev" style={{display: carouselPage === 1 ? 'none': 'block'}} onClick={() => {setCarouselPage(1)}}>
+                        <div className="prev"></div>
+                    </div>
+                    <div className="title">
+                        <div className="icon"> </div>
+                        熱門城市
+                    </div>
+                    <div className="activities">
+                        <CityCarousel type={1} carouselPage={carouselPage}></CityCarousel>
+                        <CityCarousel type={2} carouselPage={carouselPage}></CityCarousel>
+                    </div>
+                    <div className="carouselIconNext" style={{display: carouselPage === 2 ? 'none': 'block'}} onClick={() => {setCarouselPage(2)}}>
+                        <div className="next"></div>
+                    </div>
+                </div>                
                 <div className="mainActivities">
                     <div className="title">
                         <div className="icon"> </div>

@@ -1,7 +1,155 @@
-.mainActivities{
+.carouselWrap{
+    width:1280 px;
+    display: flex;
+    .container{
+        width: 202px;
+        background-color: white;
+        //padding:12px 0px;
+        display: inline-block;
+        text-align: center;
+        margin:6px;
+        
+        .longItem{
+            background-color: white;
+            position: relative;
+            padding:14px;
+            height: 245px;
+            box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+            .black-opacity{
+                left:14px;
+                position: absolute;
+                opacity: 0.3;
+                background-color: black;
+                z-index:4;
+                width:177px;
+                height:217px;
+            }
+            .icon{
+                position: absolute;
+                width:16px;
+                height:20px;
+                top: 40%;
+                left: 45%;
+                color: white;
+                z-index:5;
+            }
+            p{
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 20px;
+                z-index:5;
+            }
+        }
+        .shortItem{
+            background-color: white;
+            position: relative;
+            height: 120px;
+            padding:7px;
+            box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+            margin-bottom: 5px;
+            .black-opacity{
+                left:8px;
+                position: absolute;
+                opacity: 0.3;
+                background-color: black;
+                z-index:4;
+                width:185px;
+                height:106px;
+            }
+            .icon{
+                position: absolute;
+                width:16px;
+                height:20px;
+                top: 40%;
+                left: 45%;
+                color: white;
+                z-index:5;
+            }
+            p{
+                position: absolute;
+                top:50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 20px;
+                z-index:5;
+            }
+        }
+    }
+    .icon{
+        color: white;
+    }
+}
+
+.mainCity{
     width: 1280px;
     margin:0px auto;
     margin-top:30px;
+    padding: 50px 107px;
+    background-color: #F6F7FB;
+    z-index: 1; 
+    position: relative;
+    .carouselIconPrev{
+        position:absolute; 
+        left: 50px;
+        bottom: 150px;
+        background-color: white;
+        width:32px;
+        height:32px;
+        border-radius: 6px;
+        box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+        cursor: pointer;     
+        .prev{
+            position:absolute; 
+            left: -2px;
+            top: 11px;
+            padding-left: 10px;
+            border: 5px solid;
+            border-color: transparent black transparent transparent;   
+              
+        }
+    }
+    .carouselIconNext{
+        position:absolute; 
+        right: 50px;
+        bottom: 150px;
+        background-color: black;
+        width:32px;
+        height:32px;
+        border-radius: 6px;
+        box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);     
+        cursor: pointer;    
+        .next{
+            position:absolute; 
+            right: -2px;
+            top: 11px;
+            padding-left: 10px;
+            border: 5px solid;
+            border-color: transparent transparent transparent white;    
+        }
+    }
+    .title{
+        font-size: 20px;
+        margin-bottom:13px;
+        .icon{
+            width:0px;
+            height:0px; 
+            margin-right: 14px;
+            border: solid;
+            border-width: 0px 10px 16px 10px ;
+            border-color: transparent transparent $attractionsTheme transparent; 
+            display:inline-block;
+        }
+    }
+}
+
+.mainActivities{
+    width: 1280px;
+    margin:0px auto;
+    margin-top:10px;
     padding: 50px 107px;
     background-color: #F6F7FB;
     z-index: 1; 
@@ -14,7 +162,7 @@
             margin-right: 14px;
             border: solid;
             border-width: 0px 10px 16px 10px ;
-            border-color: transparent transparent red transparent; 
+            border-color: transparent transparent $attractionsTheme transparent; 
             display:inline-block;
         }
     }
@@ -28,6 +176,7 @@
             .activity{   
                 position:relative;  
                 width: 522px;
+                height: 242px;
                 z-index: 3;
                 background-color: white;
                 display:flex;      
@@ -93,7 +242,7 @@
                     position: absolute;   
                     z-index:2;         
                     top:-30px;
-                    left: 2px;
+                    left: 4px;
                     background-color: #E5E5E5;
                     opacity: 0.3;
                     filter: blur(3px);
@@ -160,7 +309,16 @@
                         height:137px;
                     }
                 }
+                .location{
+                    margin-top: 9.5px;
+                    color:#007350;
+                    font-weight: 300;
+                    font-size:12px;
+                    display:flex;
+                    align-items: center;
+                }
                 .name{
+                    line-height:21px;
                     font-size: 16px;
                     margin-top: 10px;
                     width: 181px;
@@ -181,11 +339,11 @@
                 &:first-child{
                     position: absolute;   
                     z-index:2;         
-                    top:-30px;
-                    left: 2px;
+                    top:-35px;
+                    left: 3px;
                     background-color: #E5E5E5;
                     opacity: 0.3;
-                    filter: blur(7px);
+                    filter: blur(3px);
                     border-color:  #0D0B0C transparent  transparent  transparent;
                     border-style: solid;
                     border-width: 52px 206px 0 0;
@@ -193,11 +351,11 @@
                 &:last-child{
                     position: absolute;
                     z-index:2;
-                    top:-30px;
+                    top:-35px;
                     right:3px;
                     background-color: #E5E5E5;
                     opacity: 0.3;
-                    filter: blur(7px);
+                    filter: blur(3px);
                     border-color:  transparent #0D0B0C transparent transparent;
                     border-style: solid;
                     border-width: 0px 206px 52px 0;

@@ -1,13 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import searchIcon from '../images/Combined-Shape.png'
 import classIcon from '../images/Vector.png'
 import axios from 'axios';
 import jsSHA from 'jssha';
+import Dropdown from './Dropdown';
 
 
 const SearchArea = ({content, setContent, food, setFood}) => {
-    const [term, setTerm] = useState('');
 
+
+    const options = ['類別','景點','活動'];
+    const optionsII = ['不分縣市','臺北市','新北市','桃園市','台中市','台南市','高雄市','基隆市','新竹市','新竹縣','苗栗縣','彰化縣','南投縣','雲林縣','嘉義縣','嘉義市','屏東縣','宜蘭縣','花蓮縣','台東縣','金門縣'];
+    const [term, setTerm] = useState('');
+    const [selected, setSelected] = useState(options[0]);
+    const [selectedII, setSelectedII] = useState(optionsII[0]);
+
+    useEffect(() => {
+        testMainAPI();
+    },[]);
+
+    const onSelectedChange = (option) => {
+        setSelected(option);
+    }
+
+    const onSelectedChangeII = (option) => {
+        setSelectedII(option);
+    }
+    
     const getAuthorizationHeader = () => {
         let AppID = '9c833dc964c2452c8bfedc900230b889';
         let AppKey = '69Q4PBFhFAio3uYEJBOcuIi4jb4';
@@ -25,19 +44,55 @@ const SearchArea = ({content, setContent, food, setFood}) => {
 
     const onClickSearch = () => {
         const keywordTxt = term;
+        const activityLimit = 10;
+        const restaurantLimit = 10;
         const limitNum = 10;
 
         const search = async ()=>{
-            console.log('I ran setResults');
-            const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-                headers:getAuthorizationHeader()
-            });
-            const Restaurant = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-                headers:getAuthorizationHeader()
-            });
-            setContent(activity);
-            setFood(Restaurant);
-            
+            if(selected !== options[0]){ 
+                if(selected === options[1]){    
+                    if(selectedII !== optionsII[0]){
+                        const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+                            headers:getAuthorizationHeader()
+                        });
+                        
+                        setFood(activity);
+                    }else{
+                        const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+                            headers:getAuthorizationHeader()
+                        });
+                        
+                        setFood(activity); 
+                    }
+
+                }else{
+                    const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+                        headers:getAuthorizationHeader()
+                    });
+                    
+                    setFood(activity);
+                }
+            }else{
+                console.log(4);
+                const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+                    headers:getAuthorizationHeader()
+                });
+                
+                setFood(activity);
+            }
+
+            // if(selectedII !== optionsII[0]){
+            //     const restaurant = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+            //         headers:getAuthorizationHeader()
+            //     });
+                
+            //     setFood(restaurant);
+            // }else{
+            //     const restaurant = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
+            //         headers:getAuthorizationHeader()
+            //     });
+            //     setFood(restaurant);
+            // }            
         };
 
         if(term){
@@ -46,6 +101,30 @@ const SearchArea = ({content, setContent, food, setFood}) => {
             console.log('there are no text');
         }
     }
+
+
+    const testMainAPI = () => {
+        const keywordTxt = term;        
+        const activityLimit = 4;
+        const restaurantLimit = 10;
+        
+        const contact = async() => {
+            const hotActivites = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=${activityLimit}&$format=JSON`, {
+                headers:getAuthorizationHeader()
+            });
+            setContent(hotActivites);
+
+            const hotRestaurent = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${restaurantLimit}&$format=JSON`, {
+                headers:getAuthorizationHeader()
+            });
+            setFood(hotRestaurent); 
+        }
+
+        contact();       
+
+    }
+
+    
 
     const onChangeEvent = event => {
         setTerm(event.target.value);        
@@ -64,12 +143,12 @@ const SearchArea = ({content, setContent, food, setFood}) => {
                     <div className="searchArea">
                         <div className="keyWordArea">
                             <input className="keyWord" placeholder="搜尋關鍵字" value={term} onChange={onChangeEvent}></input>
-                            <span className="searchIcon" onClick={onClickSearch}><img src={searchIcon}></img></span>
+                            <span className="searchIcon" ><img src={searchIcon}></img></span>
                         </div>
                         <div className="classArea">
                             <div className="classSearch">
-                                <span className="dropdown">類別</span>
-                                <span className="dropdown">不分城市</span>
+                                <Dropdown label='類別' options={options} selected={selected} onSelectedChange={onSelectedChange}></Dropdown>
+                                <Dropdown label='不分縣市' options={optionsII}  selected={selectedII}  onSelectedChange={onSelectedChangeII}></Dropdown>                              
                             </div>
                             <span className="searchIcon"><img src={classIcon}></img></span>
                         </div>

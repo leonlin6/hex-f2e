@@ -9,7 +9,9 @@ const Main = ({content, setContent, food, setFood}) => {
         return null;
 
     return (
-        <Activity content={content} food={food}></Activity>
+        <div>
+            <Activity content={content} food={food}></Activity>
+        </div>
     );    
 }
 
