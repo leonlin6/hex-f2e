@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import Activity from './Activity';
 
-const Main = ({content, setContent, food, setFood}) => {
+const Main = ({content, setContent, food, setFood, setModalShow, setModalDataNo, setCurrentCity}) => {
     useEffect(() => {
     }, [content, food]);
 
@@ -10,7 +10,7 @@ const Main = ({content, setContent, food, setFood}) => {
 
     return (
         <div>
-            <Activity content={content} food={food}></Activity>
+            <Activity content={content} food={food} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity}></Activity>
         </div>
     );    
 }

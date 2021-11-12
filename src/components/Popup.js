@@ -1,36 +1,48 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 
-const Popup = () => {
+const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
 
-    return (
-        <div className="popWrap">
-            <div className="container">
-                <div className="photo">
-                    <img src={require("../images/test.png").default}></img>
-                </div>
-                <div className="changeBtn">
-                    <div className="prevIcon">
-                        <div className="prev"></div>
+    const closeModal = () => {
+        setModalShow(false);
+    }
+
+    
+
+    if(content !== null){
+        return (
+            <div className="popWrap" style={{visibility: modalShow ? `visible`:`hidden`}}>
+                <div className="container">
+                    <div className="photo">
+                        <img src={require("../images/test.png").default}></img>
                     </div>
-                    <div className="nextIcon">
-                        <div className="next"></div>
-                    </div>                    
+                    <div className="changeBtn">
+                        <div className="prevIcon">
+                            <div className="prev"></div>
+                        </div>
+                        <div className="nextIcon">
+                            <div className="next"></div>
+                        </div>                    
+                    </div>
+                    <div className="name">{content.data[modalDataNo].Name}</div>
+                    <div className="description">{content.data[modalDataNo].Description}</div>
+                    <div className="infoWrap">
+                        <div className="infoA">
+                            <div className="openingHour"><img src={require('../images/time.png').default}></img>{content.data[modalDataNo].EndTime}</div>
+                            <div className="address"><img src={require('../images/Subtract.png').default}></img>{content.data[modalDataNo].Location}</div>
+                        </div>
+                        <div className="infoB">
+                            <div className="ticketPrice"><img src={require('../images/ticket.png').default}></img>免費</div>
+                            <div className="tel"><img src={require('../images/tel.png').default}></img>{content.data[modalDataNo].Phone}</div>
+                        </div>
+                    </div>
+
                 </div>
-                <div className="name">合歡山國際暗空公園-星空清境跨年活動</div>
-                <div className="description">南投縣與各單位多年於合歡山舉辦清境高山跨年晚會活動，今年將活動主軸由傳統跨年晚會轉化成為台灣高山星空遊程之體驗活動，在擁有東南亞區最佳的星空觀測環境。奇特造型，值得深入觀賞體會。</div>
-                <div className="infoA">
-                    <div className="openingHour">開放式空間，無時間限制</div>
-                    <div className="ticketPrice">免費</div>
-                </div>
-                <div className="infoB">
-                    <div className="address">基隆市中山區湖海路一、二段(協和街)</div>
-                    <div className="tel">886-2-24287664</div>
-                </div>
+                <div className="closeBtn" onClick={closeModal}></div>            
             </div>
-            <div className="closeBtn"></div>
-            
-        </div>
-    );    
+        );    
+    }
+
+    return null;
 }
 
 export default Popup;

@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 import CityCarousel from './CityCarousel';
 
-const Activity = ({content,food}) => {
+const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) => {
     const [carouselPage, setCarouselPage] = useState(1);
 
     const addressSlice = (address) => {
@@ -10,9 +10,16 @@ const Activity = ({content,food}) => {
         catch(error){return "";}
     }
 
+    const onOpenmodal = (e) => {
+        const noPos = e.target.id.indexOf('-');
+        const idNo = e.target.id.slice(noPos + 1);
+        setModalDataNo(idNo);
+        setModalShow(true);
+    }
+
     useEffect(() => {
-        console.log('food= ', food);
-        console.log('content= ', content);
+        console.log('Effectfood= ', food);
+        console.log('Effectcontent= ', content);
     }, [content, food]);
 
     if(content === null){
@@ -21,7 +28,7 @@ const Activity = ({content,food}) => {
     
     const renderActivity = content.data.map((item, index) => {
         return(
-            <div className="activityWrap">
+            <div key={`activity` + index} className="activityWrap">
                 <div className="activity">
                     <div className="image">
                         <img src={item.Picture.PictureUrl1} alt={item.Picture.PictureDescription1}></img>
@@ -38,7 +45,7 @@ const Activity = ({content,food}) => {
                                 <img alt="subtrcat Icon" src={subtrcatIcon}></img>
                                 {addressSlice(item.Location)}
                             </div>
-                            <div className="infomation">
+                            <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={onOpenmodal}>
                                 活動詳情
                             </div>
                         </div>
@@ -55,9 +62,10 @@ const Activity = ({content,food}) => {
     if(food === null){
         return null;
     }
+
     const renderSmallActivity = food.data.map((item, index) => {
         return(
-            <div className="activityWrap">
+            <div key={`food` + index} className="activityWrap">
                 <div className="activity">
                     <div className="image">
                         <img src={item.Picture.PictureUrl1} alt={item.Picture.PictureDescription1}></img>
@@ -91,8 +99,8 @@ const Activity = ({content,food}) => {
                         熱門城市
                     </div>
                     <div className="activities">
-                        <CityCarousel type={1} carouselPage={carouselPage}></CityCarousel>
-                        <CityCarousel type={2} carouselPage={carouselPage}></CityCarousel>
+                        <CityCarousel type={1} carouselPage={carouselPage} setCurrentCity={setCurrentCity}></CityCarousel>
+                        <CityCarousel type={2} carouselPage={carouselPage} setCurrentCity={setCurrentCity}></CityCarousel>
                     </div>
                     <div className="carouselIconNext" style={{display: carouselPage === 2 ? 'none': 'block'}} onClick={() => {setCarouselPage(2)}}>
                         <div className="next"></div>

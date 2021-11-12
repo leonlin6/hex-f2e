@@ -6,7 +6,7 @@ import jsSHA from 'jssha';
 import Dropdown from './Dropdown';
 
 
-const SearchArea = ({content, setContent, food, setFood}) => {
+const SearchArea = ({content, setContent, food, setFood, currentCity, setCurrentCity}) => {
 
 
     const options = ['類別','景點','活動'];
@@ -17,7 +17,7 @@ const SearchArea = ({content, setContent, food, setFood}) => {
 
     useEffect(() => {
         testMainAPI();
-    },[]);
+    },[currentCity]);
 
     const onSelectedChange = (option) => {
         setSelected(option);
@@ -109,12 +109,12 @@ const SearchArea = ({content, setContent, food, setFood}) => {
         const restaurantLimit = 10;
         
         const contact = async() => {
-            const hotActivites = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=${activityLimit}&$format=JSON`, {
+            const hotActivites = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${currentCity}?$top=${activityLimit}&$format=JSON`, {
                 headers:getAuthorizationHeader()
             });
             setContent(hotActivites);
 
-            const hotRestaurent = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${restaurantLimit}&$format=JSON`, {
+            const hotRestaurent = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${currentCity}?$top=${restaurantLimit}&$format=JSON`, {
                 headers:getAuthorizationHeader()
             });
             setFood(hotRestaurent); 

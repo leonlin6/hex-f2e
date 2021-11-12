@@ -1,7 +1,14 @@
 import React, {useState, useEffect} from "react";
 import subtrcatIcon from "../images/Subtract.png";
 import whiteSubtract from "../images/white-subtract.png";
-const CityCarousel  = ({type, carouselPage}) => {
+const CityCarousel  = ({type, carouselPage,setCurrentCity}) => {
+
+    const onCityChange = () => {
+        console.log('city change');
+        setCurrentCity('Taoyuan');
+    }
+
+
     if(type === 1){
         return (
             <div className="carouselWrap" style={{display: (type === carouselPage) ? `flex` : `none` }}>
@@ -20,8 +27,8 @@ const CityCarousel  = ({type, carouselPage}) => {
                         <img className="icon" alt="subtrcat Icon" src={whiteSubtract}></img>
                         <p>新北市</p>
                     </div>
-                    <div className="shortItem">
-                    <div className="black-opacity"></div>                    
+                    <div className="shortItem" onClick={onCityChange}>
+                        <div className="black-opacity"></div>                    
                         <img className="carouseImg" src={require('../images/hot_city003.png').default}></img>
                         <img className="icon" alt="subtrcat Icon" src={whiteSubtract}></img>
                         <p>桃園市</p>

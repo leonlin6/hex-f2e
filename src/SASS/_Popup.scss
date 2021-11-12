@@ -1,14 +1,22 @@
-.popWrap{
-    width:1280px;
+.popWrap{   
+    position:fixed;
+    z-index:10;
+    top:0px;
+    right:0px;
+    width:100%;
+    height:100%;
     padding: 73px;
     margin:0px auto;
-    border: 1px solid black;
+    background: rgba(210, 210, 210, 0.75);
+    backdrop-filter: blur(28px);
+    display:flex;
+    justify-content: center;
     .container{
         width: 676px;
         height: 810px;
         padding:32px;
-        margin:0px auto;
-        border: 1px solid black;
+        margin-right:12px;
+        background: white;
         .photo{
             img{
                width: 612px;
@@ -24,7 +32,7 @@
                 position:absolute; 
                 // left: 50px;
                 // bottom: 150px;
-                right: 10px;
+                right: 50px;
                 background-color: white;
                 width:32px;
                 height:32px;
@@ -43,7 +51,7 @@
 
             .nextIcon{
                 position:absolute; 
-                right: 50px;
+                right: 10px;
                 // bottom: 150px;
                 background-color: black;
                 width:32px;
@@ -66,16 +74,81 @@
             margin-bottom: 22px;
         }
         .description{
+            height: 65px;
             font-size: 14px;
             margin-bottom: 22px;
+            // overflow-y:scroll; 
+            overflow: auto;
+            scrollbar-arrow-color: red;
         }
-        .infoA{
+        .infoWrap{
             display: flex;
-            justify-content:space-around;
+            flex-direction: row;
+            justify-content:space-between;
+            .infoA{
+                display: flex;
+                justify-content:space-between;
+                flex-direction: column;
+                font-size: 14px;
+                height:70px;
+
+                .openingHour{
+                    display:flex;
+                    align-items: center;
+                    img{
+                        margin-right:12px;
+                        height:19px;
+                        width: 19px;
+                    }
+                }
+                .address{
+                    display:flex;
+                    align-items: center;
+                    img{
+                        margin-right:12px;
+                        height:19px;
+                        width: 16px;
+                    }
+                }
+            }
+            .infoB{
+                display: flex;
+                justify-content:space-between;
+                flex-direction: column;
+                padding-right: 100px;
+                font-size: 14px;
+                height:70px;
+                .ticketPrice{
+                    display:flex;
+                    align-items: center;
+                }
+                .tel{
+                    display:flex;
+                    align-items: center;
+                }
+                img{
+                    margin-right:12px;
+                    width:20px;
+                }
+            }
         }
-        .infoB{
-            display: flex;
-            justify-content:space-around;
+    }
+    .closeBtn{
+        display:fixed;
+        height:45px;
+        width:45px;
+        background-color: $attractionsTheme;
+        color: white;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        cursor: pointer; 
+        &::before{
+            content:'\2716';
+            font-size: 20px;
+            padding: 1px;
         }
     }
 }
