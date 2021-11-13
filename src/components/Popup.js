@@ -1,25 +1,57 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
 
+    useEffect(() => {}
+    ,[modalDataNo]);
+
+    const [pageCount , setPageCount] = useState(1);
+    const picLimit = Object.keys(content.data[modalDataNo].Picture).length / 2;
+    let currentSrc= "";
+
+    try{
+        currentSrc = content.data[modalDataNo].Picture[`PictureUrl${pageCount}`];
+    }
+    catch(error){
+        currentSrc = "";
+    }
+   
+
     const closeModal = () => {
         setModalShow(false);
+        setPageCount(1);
     }
 
-    
+    const nextPic = () => {   
+        if(pageCount < picLimit){
+            setPageCount( pageCount + 1);
+
+        }else{
+            return;
+        }
+    }
+
+    const prevPic = () => {
+        if(pageCount > 1){
+            setPageCount( pageCount - 1);
+        }
+        else{
+            return;
+        }
+    }
 
     if(content !== null){
         return (
             <div className="popWrap" style={{visibility: modalShow ? `visible`:`hidden`}}>
                 <div className="container">
                     <div className="photo">
-                        <img src={require("../images/test.png").default}></img>
+                        <img alt="" src={currentSrc}></img>
                     </div>
                     <div className="changeBtn">
-                        <div className="prevIcon">
+                        <div className="prevIcon" onClick={prevPic}>
                             <div className="prev"></div>
                         </div>
-                        <div className="nextIcon">
+                        <div className="nextIcon" onClick={nextPic}>
                             <div className="next"></div>
                         </div>                    
                     </div>
@@ -27,15 +59,14 @@ const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
                     <div className="description">{content.data[modalDataNo].Description}</div>
                     <div className="infoWrap">
                         <div className="infoA">
-                            <div className="openingHour"><img src={require('../images/time.png').default}></img>{content.data[modalDataNo].EndTime}</div>
-                            <div className="address"><img src={require('../images/Subtract.png').default}></img>{content.data[modalDataNo].Location}</div>
+                            <div className="openingHour"><img alt="" src={require('../images/time.png').default}></img>{content.data[modalDataNo].EndTime}</div>
+                            <div className="address"><img alt="" src={require('../images/Subtract.png').default}></img>{content.data[modalDataNo].Location}</div>
                         </div>
                         <div className="infoB">
-                            <div className="ticketPrice"><img src={require('../images/ticket.png').default}></img>免費</div>
-                            <div className="tel"><img src={require('../images/tel.png').default}></img>{content.data[modalDataNo].Phone}</div>
+                            <div className="ticketPrice"><img alt="" src={require('../images/ticket.png').default}></img>免費</div>
+                            <div className="tel"><img alt="" src={require('../images/tel.png').default}></img>{content.data[modalDataNo].Phone}</div>
                         </div>
                     </div>
-
                 </div>
                 <div className="closeBtn" onClick={closeModal}></div>            
             </div>

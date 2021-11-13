@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 import CityCarousel from './CityCarousel';
 
@@ -6,8 +6,13 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
     const [carouselPage, setCarouselPage] = useState(1);
 
     const addressSlice = (address) => {
-        try{return address.slice(0,6);}
-        catch(error){return "";}
+        try{
+            const place = address.indexOf('');
+            return address.slice(0,6);
+        }
+        catch(error){
+            return "";
+        }
     }
 
     const onOpenmodal = (e) => {
@@ -17,21 +22,31 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
         setModalShow(true);
     }
 
+    const defaultImg = (event) => {
+        event.target.src = require('../images/no-image.jpg').default;
+    }
+
+    const loadingImgae = (src) => {
+        if(!src){
+            return require('../images/no-image.jpg').default;
+        }else{
+            return src;
+        }
+    }
+
     useEffect(() => {
         console.log('Effectfood= ', food);
         console.log('Effectcontent= ', content);
+        
     }, [content, food]);
 
-    if(content === null){
-        return null;
-    }
     
     const renderActivity = content.data.map((item, index) => {
         return(
             <div key={`activity` + index} className="activityWrap">
                 <div className="activity">
                     <div className="image">
-                        <img src={item.Picture.PictureUrl1} alt={item.Picture.PictureDescription1}></img>
+                        <img src={loadingImgae(item.Picture.PictureUrl1)} alt={item.Picture.PictureDescription1} ></img>
                     </div>
                     <div className="content">
                         <div className="name">
@@ -43,7 +58,7 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                         <div className="detailArea">
                             <div className="location">
                                 <img alt="subtrcat Icon" src={subtrcatIcon}></img>
-                                {addressSlice(item.Location)}
+                                {item.Location}
                             </div>
                             <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={onOpenmodal}>
                                 活動詳情
@@ -59,35 +74,86 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
         );
     });      
 
-    if(food === null){
-        return null;
+
+
+    const renderSmallActivity = () => {
+        try{
+            const tt = food.data.map((item, index) => {
+                return(
+                    <div key={`food` + index} className="activityWrap">
+                        <div className="activity">
+                            <div className="image">
+                                <img src={loadingImgae(item.Picture.Picture)} alt={'Picture'} onError={defaultImg}></img>
+                            </div>
+                            <div className="name">
+                                {item.Name}
+                            </div>
+                            <div className="location">
+                                <img alt="subtrcat Icon" src={subtrcatIcon}></img>
+                                {addressSlice(item.Address)}
+                            </div>
+                        </div>
+                        <div className="searchShadow">
+                            <div className="shadow"></div>
+                            <div className="shadow"></div>
+                        </div>
+                    </div>
+                );
+            });  
+            return tt;
+        }catch(error){
+            return null;
+        }
+
+
     }
+ 
 
-    const renderSmallActivity = food.data.map((item, index) => {
-        return(
-            <div key={`food` + index} className="activityWrap">
-                <div className="activity">
-                    <div className="image">
-                        <img src={item.Picture.PictureUrl1} alt={item.Picture.PictureDescription1}></img>
-                    </div>
-                    <div className="name">
-                        {item.Name}
-                    </div>
-                    <div className="location">
-                        <img alt="subtrcat Icon" src={subtrcatIcon}></img>
-                        {addressSlice(item.Address)}
-                    </div>
-                </div>
-                <div className="searchShadow">
-                    <div className="shadow"></div>
-                    <div className="shadow"></div>
-                </div>
-            </div>
-        );
-    });   
+    const renderSearchResult = () => {
+            try{
+                const results = food.data.map((item, index) => {
+                    return(
+                        <div key={`food` + index} className="activityWrap">
+                            <div className="activity">
+                                <div className="image">
+                                    <img src={loadingImgae(item.Picture.Picture)} alt={'Picture'} onError={defaultImg}></img>
+                                </div>
+                                <div className="name">
+                                    {item.Name}
+                                </div>
+                                <div className="location">
+                                    <img alt="subtrcat Icon" src={subtrcatIcon}></img>
+                                    {addressSlice(item.Address)}
+                                </div>
+                            </div>
+                            <div className="searchShadow">
+                                <div className="shadow"></div>
+                                <div className="shadow"></div>
+                            </div>
+                        </div>
+                    );
+                });  
+
+                return results;
+            }
+            catch(error){
+                    console.log('testset');
+                    return (
+                        <div className="noResults">
+                            <img src={require('../images/Union.png').default}></img>
+                            <div className="vertical">
+                                <p>Oop!</p>                                
+                                <p>很抱歉，找不到符合此搜尋相關的內容。</p>
+                            </div>
+ 
+                        </div>
+                    );              
+            }
+    } 
 
 
-    if(food !== null){
+    if(food !== {}){
+        console.log('setsets');
         return (
             <div>
                 <div className="mainCity">
@@ -121,10 +187,19 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                         熱門餐飲
                     </div>
                     <div className="activities">
-                        {renderSmallActivity}
+                        {renderSmallActivity()}
                     </div>
+                </div>
+                <div className="mainFood">
+                    <div className="title">
+                        <div className="icon"> </div>
+                        台北市
+                    </div>
+                    <div className="activities">
+                        {renderSearchResult()}
+                    </div>
+                </div>       
             </div>    
-        </div>    
         );
     }
 

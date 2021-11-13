@@ -1030,7 +1030,6 @@ template {
 .mainFood {
   width: 1280px;
   margin: 0px auto;
-  margin-top: 30px;
   padding: 50px 107px;
   background-color: #F6F7FB;
   z-index: 1;
@@ -1148,6 +1147,72 @@ template {
   border-color: transparent #0D0B0C transparent transparent;
   border-style: solid;
   border-width: 0px 206px 52px 0;
+}
+
+.mainFood .activities .noResults {
+  height: 300px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mainFood .activities .noResults img {
+  height: 53px;
+  width: 53px;
+  margin: auto;
+}
+
+.mainFood .activities .noResults .vertical {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.mainFood .activities .noResults .vertical p {
+  margin: 3px 5px;
+  display: inline;
+}
+
+.mainFood .activities .noResults .vertical p:first-child {
+  color: #FFB72C;
+  font-family: 'Roboto';
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.mainFood .activities .noResults .vertical p:last-child {
+  color: #D2D2D2;
+  font-size: 18px;
+}
+
+.Footer {
+  width: 100%;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Footer p {
+  padding: 22.5px 0px;
+  font-size: 12px;
+  color: #ACACAC;
+  font-family: 'Roboto';
+  margin: 0px;
 }
 
 .popWrap {

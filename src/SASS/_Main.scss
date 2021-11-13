@@ -273,7 +273,6 @@
 .mainFood{
     width: 1280px;
     margin:0px auto;
-    margin-top:30px;
     padding: 50px 107px;
     background-color: #F6F7FB;
     z-index: 1; 
@@ -363,6 +362,36 @@
                     border-width: 0px 206px 52px 0;
                 }
         
+            }
+        }
+        .noResults{
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            img{
+                height: 53px;
+                width: 53px;                
+                margin: auto;
+            }
+            .vertical{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                p{
+                    margin:3px 5px;
+                    display:inline;
+                    &:first-child{
+                        color:#FFB72C;
+                        font-family: 'Roboto';                                                
+                        font-weight: 800;
+                        font-size: 20px;
+                    }
+                    &:last-child{
+                        color: #D2D2D2;
+                        font-size: 18px;
+                    }
+                }
             }
         }
     }

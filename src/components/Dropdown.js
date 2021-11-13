@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 
-const Dropdown = ({label, options, selected, onSelectedChange}) =>{
+const Dropdown = ({label, option, selected, onSelectedChange}) =>{
 
     const [open , setOpen] = useState(false);
     const ref = useRef();
@@ -22,13 +22,13 @@ const Dropdown = ({label, options, selected, onSelectedChange}) =>{
         },[]
     );
 
-    const renderedOptions = options.map((option, index) => { 
+    const renderedOptions = option.map((option, index) => { 
         if(index === 0){
             return null;
         }
-        // if(option === selected){
-        //     return null;
-        // }
+        if(option === selected){
+            return null;
+        }
 
         return(
             <div key={option} className="dropItem" onClick={() => {onSelectedChange(option)}}>
@@ -39,8 +39,8 @@ const Dropdown = ({label, options, selected, onSelectedChange}) =>{
 
     const onDropDown = () =>{
         setOpen(!open);
-console.log('click work');
     }
+    
     return(
         <div ref={ref} >
             <span className="dropdown" onClick={onDropDown}>{selected}
