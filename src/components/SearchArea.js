@@ -119,7 +119,14 @@ const SearchArea = ({path, content, setContent, food, setFood, currentCity, setC
         <div className="container"> 
             <div className="wrap">
                 <div className="searchWrap">
-                    <div className="title">Welcome to Taiwan</div>
+                    <div className="title">
+                        Welc
+                        <div className="circle"></div>
+                           me t
+                        <div className="square"></div>  
+                        <div className="taiwan">Taiwan</div>
+                        <div className="triangle"></div>
+                        </div>
                     <div className="description">
                         台中、台南、屏東、宜蘭．．．．．遊遍台灣
                     </div>

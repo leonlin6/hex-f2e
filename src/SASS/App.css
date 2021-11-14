@@ -513,15 +513,53 @@ template {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 183px 400px 0px 400px;
+  padding: 183px 350px 0px 370px;
 }
 
 .container .wrap .searchWrap .title {
   font-size: 50px;
   padding: 0px;
   margin: 0px;
-  display: block;
+  display: inline;
   color: white;
+  text-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+  font-weight: 600;
+  line-height: 20px;
+  position: relative;
+}
+
+.container .wrap .searchWrap .title .circle {
+  display: inline-block;
+  border-radius: 35px;
+  width: 35px;
+  height: 35px;
+  border: 7px solid #FF1D6C;
+}
+
+.container .wrap .searchWrap .title .square {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 7px solid #FF1D6C;
+  margin: 0px 10px 0px 2px;
+}
+
+.container .wrap .searchWrap .title .taiwan {
+  display: inline;
+  color: #FF1D6C;
+}
+
+.container .wrap .searchWrap .title .triangle {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 6px;
+  right: 96px;
+  border: solid;
+  border-width: 0 10px 20px 14px;
+  border-color: transparent transparent #FF1D6C transparent;
+  -webkit-transform: rotate(29.07deg);
+          transform: rotate(29.07deg);
 }
 
 .container .wrap .searchWrap .description {
