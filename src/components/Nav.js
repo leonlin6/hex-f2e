@@ -1,11 +1,11 @@
 import React from 'react';
 import navLogo from '../images/headerLogo.png'
 
-const Nav = () => {
+const Nav = ({setShowMainPage}) => {
     return (
         <div className="navWrap">
             <div className="navLogo">
-                <a href="/">
+                <a href="/" >
                     <img alt=""  src={navLogo}></img>
                 </a>
             </div>
@@ -14,7 +14,7 @@ const Nav = () => {
                     <div className="navIcon">
                         <div className="navInsideIcon"></div>
                     </div>
-                    <a href="/scenicspot">台灣景點</a>
+                    <a href="/">台灣景點</a>
                 </span>
                 <span className="foodTheme">
                     <div className="navIcon">

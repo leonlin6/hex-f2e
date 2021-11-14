@@ -43,7 +43,8 @@ const Dropdown = ({label, option, selected, onSelectedChange}) =>{
     
     return(
         <div ref={ref} >
-            <span className="dropdown" onClick={onDropDown}>{selected}
+            <span className="dropdown" onClick={onDropDown}>
+                {selected}
                 <div className="dropIcon"> </div>
                 <div className={`menu ${open ? 'visible' : ''}`}>
                     {renderedOptions}

@@ -1,23 +1,47 @@
 import React, {useEffect, useState} from 'react';
-import searchIcon from '../images/Combined-Shape.png'
-import classIcon from '../images/Vector.png'
-import axios from 'axios';
-import jsSHA from 'jssha';
+import searchIcon from '../images/Combined-Shape.png';
+import classIcon from '../images/Vector.png';
 import Dropdown from './Dropdown';
+import {apiScenicspotGet, apiActivityGet, apiHotActivityGet, apiHotRestaurantGet, apiHotelGet, apiRestaurantGet} from '../APIs/APIs';
 
+const SearchArea = ({path, content, setContent, food, setFood, currentCity, setCurrentCity, setShowMainPage, citySelected, setCitySelected, setFinalCity}) => {
+ 
 
-const SearchArea = ({content, setContent, food, setFood, currentCity, setCurrentCity}) => {
+    const classOptionSpot = ['類別','景點','活動'];
+    const classOptionFood = ['類別','美食','住宿'];
+    const cityOption = ['不分縣市','臺北市','新北市','桃園市','臺中市','臺南市','高雄市','基隆市','新竹市','新竹縣','苗栗縣','彰化縣','南投縣','雲林縣','嘉義縣','屏東縣','宜蘭縣','花蓮縣','臺東縣','金門媽祖澎湖'];
 
+    const translate = {
+        臺北市:'Taipei',
+        新北市:'NewTaipei',
+        桃園市:'Taoyuan',
+        新竹市:'Hsinchu',        
+        臺中市:'Taichung',
+        南投縣:'NantouCounty',
+        嘉義縣:'Chiayi',
+        臺南市:'Tainan',
+        高雄市:'Kaohsiung',
+        屏東縣 :'PingtungCounty',
+        宜蘭縣:'YilanCounty',
+        花蓮縣:'HualienCounty',
+        臺東縣:'TaitungCounty',
+        金門媽祖澎湖:'KinmenCounty',
+        基隆市:'Keelung',
+        新竹縣:'HsinchuCounty',
+        苗栗縣:'MiaoliCounty',
+        彰化縣:'ChanghuaCounty',
+        雲林縣:'YunlinCounty',
+        嘉義市:'Chiayi'
+       }
 
-    const classOption = ['類別','景點','活動'];
-    const cityOption = ['不分縣市','臺北市','新北市','桃園市','台中市','台南市','高雄市','基隆市','新竹市','新竹縣','苗栗縣','彰化縣','南投縣','雲林縣','嘉義縣','嘉義市','屏東縣','宜蘭縣','花蓮縣','台東縣','金門縣'];
     const [term, setTerm] = useState('');
-    const [classSelected, setClassSelected] = useState(classOption[0]);
-    const [citySelected, setCitySelected] = useState(cityOption[0]);
+    const [classSelected, setClassSelected] = useState(classOptionSpot[0]);
 
     useEffect(() => {
         homePageAPI();
     },[currentCity]);
+
+
 
     const onSelectedChange = (option) => {
         setClassSelected(option);
@@ -26,37 +50,34 @@ const SearchArea = ({content, setContent, food, setFood, currentCity, setCurrent
     const onSelectedChangeII = (option) => {
         setCitySelected(option);
     }
-    
-    const getAuthorizationHeader = () => {
-        let AppID = '9c833dc964c2452c8bfedc900230b889';
-        let AppKey = '69Q4PBFhFAio3uYEJBOcuIi4jb4';
-    
-        let GMTString = new Date().toGMTString();
-        let ShaObj = new jsSHA('SHA-1', 'TEXT');
-        ShaObj.setHMACKey(AppKey, 'TEXT');
-        ShaObj.update('x-date: ' + GMTString);
-        let HMAC = ShaObj.getHMAC('B64');
-        let Authorization = 'hmac username="' + AppID + '", algorithm="hmac-sha1", headers="x-date", signature="' + HMAC + '"';
-
-        return { 'Authorization': Authorization, 'X-Date': GMTString }; 
-    }
 
 
-    const onClickSearch = () => {       
-        const citySpotLimit = 20;
+    const onClickSearch = () => {  
+        setShowMainPage(false);  
+        setFinalCity(citySelected);
 
-        const search = async () => {
-            if(classSelected === 1){
-                const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$filter=contains(Name,'${term}')&$top=${citySpotLimit}&$format=JSON`, {
-                    headers:getAuthorizationHeader()
-                });
+        const spotSearch = async () => {
+            if(classSelected === '景點'){                
+                const activity = await apiScenicspotGet(translate[citySelected], term);
                 setFood(activity);
-            }else{
-                const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/Taipei?$filter=contains(Name,'${term}')&$top=${citySpotLimit}&$format=JSON`, {
-                    headers:getAuthorizationHeader()
-                });
+            }
+            
+            if(classSelected === '活動'){
+                const spot = await apiActivityGet(translate[citySelected], term);
+                setFood(spot);
+            }
+        }
+
+        const foodSearch = async () => {
+            if(classSelected === '美食'){                
+                const activity = await apiRestaurantGet(translate[citySelected], term);
                 setFood(activity);
-            } 
+            }
+            
+            if(classSelected === '住宿'){
+                const spot = await apiHotelGet(translate[citySelected], term);
+                setFood(spot);
+            }
         }
 
         const noTermResult = () => {
@@ -64,78 +85,27 @@ const SearchArea = ({content, setContent, food, setFood, currentCity, setCurrent
         }
 
 
-
-        // const search = async ()=>{
-        //     if(selected !== options[0]){ 
-        //         if(selected === options[1]){    
-        //             if(selectedII !== optionsII[0]){
-        //                 const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/Taipei?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-        //                     headers:getAuthorizationHeader()
-        //                 });
-                        
-        //                 setFood(activity);
-        //             }else{
-        //                 const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-        //                     headers:getAuthorizationHeader()
-        //                 });
-                        
-        //                 setFood(activity); 
-        //             }
-
-        //         }else{
-        //             const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-        //                 headers:getAuthorizationHeader()
-        //             });
-                    
-        //             setFood(activity);
-        //         }
-        //     }else{
-        //         console.log(4);
-        //         const activity = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-        //             headers:getAuthorizationHeader()
-        //         });
-                
-        //         setFood(activity);
-        //     }
-
-            // if(selectedII !== optionsII[0]){
-            //     const restaurant = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-            //         headers:getAuthorizationHeader()
-            //     });
-                
-            //     setFood(restaurant);
-            // }else{
-            //     const restaurant = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(Name,'${keywordTxt}')&$top=${limitNum}&$format=JSON`, {
-            //         headers:getAuthorizationHeader()
-            //     });
-            //     setFood(restaurant);
-            // }            
-        // };
-
         if(term){
-            search();
+            if(path === "/"){
+                spotSearch();
+            }else if(path === "/food&hotel"){
+                foodSearch();
+            }
+            
         }else{
             noTermResult();
         }
     }
 
 
-    const homePageAPI = () => {   
-        const activityLimit = 4;
-        const restaurantLimit = 10;
-        
+    const homePageAPI = () => {           
         const contact = async() => {
-            const hotActivites = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${currentCity}?$top=${activityLimit}&$format=JSON`, {
-                headers:getAuthorizationHeader()
-            });
+            const hotActivites = await apiHotActivityGet(currentCity);
+            const hotRestaurant = await apiHotRestaurantGet(currentCity);
+
             setContent(hotActivites);
-
-            const hotRestaurent = await axios.get(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${restaurantLimit}&$format=JSON`, {
-                headers:getAuthorizationHeader()
-            });
-            setFood(hotRestaurent); 
+            setFood(hotRestaurant); 
         }
-
         contact();       
     }    
 
@@ -160,10 +130,10 @@ const SearchArea = ({content, setContent, food, setFood, currentCity, setCurrent
                         </div>
                         <div className="classArea">
                             <div className="classSearch">
-                                <Dropdown label='類別' option={classOption} selected={classSelected} onSelectedChange={onSelectedChange}></Dropdown>
-                                <Dropdown label='不分縣市' option={cityOption}  selected={citySelected}  onSelectedChange={onSelectedChangeII}></Dropdown>                              
+                                <Dropdown label='類別' option={path === "/food&hotel" ? classOptionFood : classOptionSpot} selected={classSelected} onSelectedChange={onSelectedChange}></Dropdown>
+                                <Dropdown label='不分縣市' option={cityOption}  selected={citySelected}  onSelectedChange={onSelectedChangeII}></Dropdown>         
                             </div>
-                            <span className="searchIcon"><img alt="" src={classIcon}></img></span>
+                            {/* <span className="searchIcon"><img alt="" src={classIcon}></img></span> */}
                         </div>
                     </div>
                 </div>

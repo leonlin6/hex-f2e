@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 import CityCarousel from './CityCarousel';
 
-const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) => {
+const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, showMainPage}) => {
     const [carouselPage, setCarouselPage] = useState(1);
 
     const addressSlice = (address) => {
         try{
-            const place = address.indexOf('');
+            //const place = address.indexOf('');
             return address.slice(0,6);
         }
         catch(error){
@@ -16,6 +16,7 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
     }
 
     const onOpenmodal = (e) => {
+        console.log('onclick');
         const noPos = e.target.id.indexOf('-');
         const idNo = e.target.id.slice(noPos + 1);
         setModalDataNo(idNo);
@@ -41,49 +42,56 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
     }, [content, food]);
 
     
-    const renderActivity = content.data.map((item, index) => {
-        return(
-            <div key={`activity` + index} className="activityWrap">
-                <div className="activity">
-                    <div className="image">
-                        <img src={loadingImgae(item.Picture.PictureUrl1)} alt={item.Picture.PictureDescription1} ></img>
-                    </div>
-                    <div className="content">
-                        <div className="name">
-                            {item.Name}
-                        </div>
-                        <div className="description">
-                            <p>{item.Description}</p>
-                        </div>
-                        <div className="detailArea">
-                            <div className="location">
-                                <img alt="subtrcat Icon" src={subtrcatIcon}></img>
-                                {item.Location}
+    const renderActivity = () => {
+        try{
+            const render = content.data.map((item, index) => {
+                return(
+                    <div key={`activity` + index} className="activityWrap">
+                        <div className="activity">
+                            <div className="image">
+                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={item.Picture.PictureDescription1} ></img>
                             </div>
-                            <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={onOpenmodal}>
-                                活動詳情
+                            <div className="content">
+                                <div className="name">
+                                    {item.Name}
+                                </div>
+                                <div className="description">
+                                    <p>{item.Description}</p>
+                                </div>
+                                <div className="detailArea">
+                                    <div className="location">
+                                        <img alt="subtrcat Icon" src={subtrcatIcon}></img>
+                                        {item.Location}
+                                    </div>
+                                    <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={onOpenmodal}>
+                                        活動詳情
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div className="searchShadow">
+                            <div className="shadow"></div>
+                            <div className="shadow"></div>
+                        </div>
                     </div>
-                </div>
-                <div className="searchShadow">
-                    <div className="shadow"></div>
-                    <div className="shadow"></div>
-                </div>
-            </div>
-        );
-    });      
-
-
+                );
+            }); 
+            return render;  
+        } 
+        catch(error){
+            return null;
+        }
+    }
+  
 
     const renderSmallActivity = () => {
         try{
-            const tt = food.data.map((item, index) => {
+            const render = food.data.map((item, index) => {
                 return(
                     <div key={`food` + index} className="activityWrap">
-                        <div className="activity">
+                        <div className="activity"  onClick={onOpenmodal}>
                             <div className="image">
-                                <img src={loadingImgae(item.Picture.Picture)} alt={'Picture'} onError={defaultImg}></img>
+                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'} onError={defaultImg}></img>
                             </div>
                             <div className="name">
                                 {item.Name}
@@ -100,15 +108,12 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                     </div>
                 );
             });  
-            return tt;
+            return render;
         }catch(error){
             return null;
         }
-
-
     }
  
-
     const renderSearchResult = () => {
             try{
                 const results = food.data.map((item, index) => {
@@ -116,7 +121,7 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                         <div key={`food` + index} className="activityWrap">
                             <div className="activity">
                                 <div className="image">
-                                    <img src={loadingImgae(item.Picture.Picture)} alt={'Picture'} onError={defaultImg}></img>
+                                    <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'} onError={defaultImg}></img>
                                 </div>
                                 <div className="name">
                                     {item.Name}
@@ -137,15 +142,13 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                 return results;
             }
             catch(error){
-                    console.log('testset');
                     return (
                         <div className="noResults">
                             <img src={require('../images/Union.png').default}></img>
                             <div className="vertical">
                                 <p>Oop!</p>                                
                                 <p>很抱歉，找不到符合此搜尋相關的內容。</p>
-                            </div>
- 
+                            </div> 
                         </div>
                     );              
             }
@@ -153,7 +156,6 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
 
 
     if(food !== {}){
-        console.log('setsets');
         return (
             <div>
                 <div className="mainCity">
@@ -178,7 +180,7 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                         熱門活動
                     </div>
                     <div className="activities">
-                        {renderActivity}
+                        {renderActivity()}
                     </div>
                 </div>
                 <div className="mainFood">
@@ -190,15 +192,6 @@ const Activity = ({content, food, setModalShow,setModalDataNo, setCurrentCity}) 
                         {renderSmallActivity()}
                     </div>
                 </div>
-                <div className="mainFood">
-                    <div className="title">
-                        <div className="icon"> </div>
-                        台北市
-                    </div>
-                    <div className="activities">
-                        {renderSearchResult()}
-                    </div>
-                </div>       
             </div>    
         );
     }

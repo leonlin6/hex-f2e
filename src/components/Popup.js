@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 
-const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
+const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
 
     useEffect(() => {}
     ,[modalDataNo]);
 
     const [pageCount , setPageCount] = useState(1);
-    const picLimit = Object.keys(content.data[modalDataNo].Picture).length / 2;
+    let picLimit = 1;
     let currentSrc= "";
 
     try{
         currentSrc = content.data[modalDataNo].Picture[`PictureUrl${pageCount}`];
+        picLimit = Object.keys(content.data[modalDataNo].Picture).length / 2;
+
     }
     catch(error){
         currentSrc = "";
@@ -40,7 +42,7 @@ const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
         }
     }
 
-    if(content !== null){
+    try{
         return (
             <div className="popWrap" style={{visibility: modalShow ? `visible`:`hidden`}}>
                 <div className="container">
@@ -71,9 +73,9 @@ const Popup = ({content, modalShow, setModalShow, modalDataNo}) => {
                 <div className="closeBtn" onClick={closeModal}></div>            
             </div>
         );    
+    }catch(error){
+        return null;
     }
-
-    return null;
 }
 
 export default Popup;
