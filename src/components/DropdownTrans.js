@@ -22,23 +22,23 @@ const Dropdown = ({option, selected, onSelectedChange}) =>{
         },[]
     );
 
-    const renderedOptions = option.map((option, index) => { 
-        if(index === 0){
-            return null;
-        }
-        if(option === selected){
+    const renderedOptions = option.map((item, index) => { 
+        if(item.name === selected){
             return null;
         }
 
         return(
-            <div key={option} className="dropItem" onClick={() => {onSelectedChange(option)}}>
-                {option}
+            <div key={item.uuid} className="dropItem" onClick={() => {onSelectedChange(item.name)}}>
+                {item.name}
             </div>
         )
     });
 
     const onDropDown = () =>{
-        setOpen(!open);
+        if(option.length !== 0){
+            setOpen(!open);
+        }
+            
     }
     
     return(

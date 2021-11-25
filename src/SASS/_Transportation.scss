@@ -1,0 +1,268 @@
+.transContainer{
+    padding-bottom: 85px;
+    .wrap{
+        width:1280px;
+        padding:20px 20px 0px 20px;
+        margin: 0px auto;
+        background-color: white ;   
+        position:relative;
+        z-index: 5;
+        .searchWrap{           
+            margin: 15px 0px 40px 0px;
+            align-items: center;
+            padding: 0px 350px 0px 370px;
+            .searchArea{
+                .classArea{
+                    display:inline-flex;
+                    .classSearch{         
+                        width:445px;
+                        display:inline-flex;
+                        justify-content: space-between;
+                        .dropdown{
+                            box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);       
+                            width: 220px;
+                            height:40px;
+                            padding:8.5px 0px 8.5px 0px;
+                            background-color: white ;       
+                            border-radius: 6px;
+                            position: relative;
+                            padding-left:24px;
+                            display:flex;
+                            justify-content: space-between;                            
+                            cursor: pointer;
+                            .dropIconClose{
+                                position:absolute; 
+                                display: inline;
+                                right:10px;
+                                top:15px;
+                                border-width: 10px;
+                                border: 5px solid;
+                                border-color: transparent transparent transparent black;                                
+                            }
+                            .dropIconOpen{
+                                position:absolute; 
+                                display: inline;
+                                right:10px;
+                                top:15px;
+                                border-width: 10px;
+                                border: 5px solid;
+                                border-color: black transparent transparent transparent;                                
+                            }
+                            .menu{
+                                visibility:hidden;
+                                cursor: pointer;
+                                display: flex;                                
+                                flex-direction: column;
+                                position:absolute;
+                                top:35px;
+                                left:0px;
+                                background-color: white;      
+                                box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);        
+                                overflow: scroll; 
+                                scrollbar-width: thin; 
+                                height:300px;
+                                overflow-x: hidden;
+                                .dropItem{
+                                    background-color: white;  
+                                    width:203px;
+                                    height:30px;
+                                    line-height: 30px;;
+                                    padding-left:24px;
+                                    &:hover{
+                                        background-color: $attractionsTheme;
+                                    }
+                                }
+                            }
+                            .menu.visible{
+                                visibility: visible;
+                            }
+                        }
+                    }
+                    .searchIcon{
+                        cursor: pointer;
+                        background-color: $attractionsTheme ;          
+                        height:40px;       
+                        width:40px;   
+                        display:inline-flex;
+                        align-items: center;                                
+                        border-radius: 6px;
+                        justify-content: center;
+                        margin-left:6px;
+                    }
+
+                }
+            }
+        }
+    }
+    .searchShadow{
+        position: relative;
+        justify-content: space-between;
+        width: 1280px;    
+        margin: 0px auto;
+        background-color: #E5E5E5;
+        z-index:1;
+        .shadow{
+            &:first-child{
+                position: absolute;   
+                top:-30px;
+                left: 2px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  #0D0B0C transparent  transparent  transparent;
+                border-style: solid;
+                border-width: 52px 640px 0 0;
+            }
+            &:last-child{
+                position: absolute;
+                top:-30px;
+                right:3px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  transparent #0D0B0C transparent transparent;
+                border-style: solid;
+                border-width: 0px 640px 52px 0;
+            }
+
+        }
+    }
+    .routeSwitch{
+        margin: 00px auto 0px auto;
+        width: 572px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        .ToContainer{
+            display: block;
+            cursor: pointer;
+            width: 244px;        
+            display: flex;
+            .To{
+                align-items: center;
+                margin: 0px auto;
+                padding: 13.5px 0px;
+            }
+            &.active{
+                border-bottom: 4px solid $attractionsTheme;            
+            }
+        }
+
+
+
+    }
+    .refreshText{
+        display: flex;
+        justify-content: end;
+        margin: 46px auto 12px auto;
+        width: 955px;
+        color:$attractionsTheme;
+    }
+    .routeContent{    
+        position:relative;   
+        z-index: 2;
+        margin: 0px auto;
+        padding: 75px 128px;
+        width: 955px;
+        background-color: white;
+        display:flex;
+        justify-content:start;
+        flex-direction: column;
+        flex-wrap:wrap;
+        h1{
+            font-size: 24px;
+            color: #ACACAC;
+            font-weight: 400;
+        }
+        .routeItem{
+            display:inline-flex;
+            margin-bottom:20px;            
+            margin-right: 33px;
+            .time{
+                display:inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px;
+                border: 2px solid black;
+                width: 145px;
+                height:45px;
+            }
+            .timeArrive{
+                display:inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px;
+                border: 2px solid $attractionsTheme;
+                width: 145px;
+                height:45px;
+                background-color: $attractionsTheme;
+                color:white;
+            }
+            .timeOut{
+                display:inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px;
+                width: 145px;
+                height:45px;
+                border: 2px solid #ACACAC;
+                color:#ACACAC;
+
+            }
+            .timeLeave{
+                display:inline-flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 6px;
+                border: 2px solid $foodTheme;
+                width: 145px;
+                height:45px;
+                background-color: $foodTheme;
+                color:white;
+            }
+            .sign{
+                width:150px;
+                display:inline-flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 25px;
+                margin-left: 25px;
+    
+            }
+        }
+
+    }
+    .routeShadow{
+        position: relative;
+        justify-content: space-between;
+        width: 1280px;    
+        margin: 0px auto;
+        background-color: #E5E5E5;
+        z-index:1;
+        .shadow{
+            &:first-child{
+                position: absolute;   
+                top:-20px;
+                left: 165px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  #0D0B0C transparent  transparent  transparent;
+                border-style: solid;
+                border-width: 52px 480px 0 0;
+            }
+            &:last-child{
+                position: absolute;
+                top:-20px;
+                right:165px;
+                background-color: #E5E5E5;
+                opacity: 0.3;
+                filter: blur(3px);
+                border-color:  transparent #0D0B0C transparent transparent;
+                border-style: solid;
+                border-width: 0px 480px 52px 0;
+            }
+
+        }
+    }
+}

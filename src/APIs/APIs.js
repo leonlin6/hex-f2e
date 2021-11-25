@@ -11,13 +11,12 @@ const getAuthorizationHeader = () => {
     ShaObj.update('x-date: ' + GMTString);
     let HMAC = ShaObj.getHMAC('B64');
     let Authorization = 'hmac username="' + AppID + '", algorithm="hmac-sha1", headers="x-date", signature="' + HMAC + '"';
-
     return { 'Authorization': Authorization, 'X-Date': GMTString }; 
 }
 
+
 const scenicspotGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 20,
         $format:'JSON'
@@ -27,7 +26,6 @@ const scenicspotGet = axios.create({
 
 const activityGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 20,
         $format:'JSON'
@@ -37,7 +35,6 @@ const activityGet = axios.create({
 
 const restaurantGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 20,
         $format:'JSON'
@@ -47,7 +44,6 @@ const restaurantGet = axios.create({
 
 const hotelGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 20,
         $format:'JSON'
@@ -57,7 +53,6 @@ const hotelGet = axios.create({
 
 const hotActivityGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 4,
         $format:'JSON'
@@ -67,7 +62,6 @@ const hotActivityGet = axios.create({
 
 const hotRestaurantGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant',
-    headers: getAuthorizationHeader(),
     params: {
         $top: 7,
         $format:'JSON'
@@ -76,10 +70,46 @@ const hotRestaurantGet = axios.create({
 });
 
 
+const busRouteGet = axios.create({
+    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/',
+    params: {
+        $format:'JSON'
+    }
+  
+});
 
-export const apiScenicspotGet = (city, term) => { return scenicspotGet.get(`/${city}?$filter=contains(Name,'${term}')`)};
-export const apiActivityGet = (city, term) => { return activityGet.get(`/${city}?$filter=contains(Name,'${term}')`)};
-export const apiRestaurantGet = (city, term) => { return restaurantGet.get(`/${city}?$filter=contains(Name,'${term}')`)};
-export const apiHotelGet = (city, term) => { return hotelGet.get(`/${city}?$filter=contains(Name,'${term}')`)};
-export const apiHotActivityGet = (city) => { return hotActivityGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`)};
-export const apiHotRestaurantGet = (city) => { return hotRestaurantGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`)};
+
+const busRouteInfoGet = axios.create({
+    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/Route/City/',
+    params: {
+        $format:'JSON'
+    }
+  
+});
+
+const busStopGet = axios.create({
+    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/StopOfRoute/City/',
+    params: {
+        $format:'JSON'
+    }
+  
+});
+
+const busStopTimeOfArrivalGet = axios.create({
+    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/EstimatedTimeOfArrival/City',
+    params: {
+        $format:'JSON'
+    }  
+});
+
+
+export const apiScenicspotGet = (city, term) => { return scenicspotGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiActivityGet = (city, term) => { return activityGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiRestaurantGet = (city, term) => { return restaurantGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiHotelGet = (city, term) => { return hotelGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiHotActivityGet = (city) => { return hotActivityGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`, {headers:getAuthorizationHeader()})};
+export const apiHotRestaurantGet = (city) => { return hotRestaurantGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`, {headers:getAuthorizationHeader()})};
+export const apiBusRouteGet = (city) => { return busRouteGet.get(`/${city}`, {headers:getAuthorizationHeader()})};
+export const apiBusRouteInfoGet = (city, busNum) => { return busRouteInfoGet.get(`/${city}/${busNum}`, {headers:getAuthorizationHeader()})};
+export const apiBusStopGet = (city, busNum) => { return busStopGet.get(`/${city}/${busNum}`, {headers:getAuthorizationHeader()})};
+export const apiBusStopTimeOfArrivalGet = (city, busNum) => { return busStopTimeOfArrivalGet.get(`/${city}/${busNum}`, {headers:getAuthorizationHeader()})};

@@ -16,11 +16,12 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
     }
 
     const onOpenmodal = (e) => {
-        console.log('click123');
+     
         const noPos = e.target.id.indexOf('-');
         const idNo = e.target.id.slice(noPos + 1);
-        console.log(e);
-        setModalDataNo(idNo);
+        console.log('noPos', noPos);
+        console.log('idNo', idNo);
+        // setModalDataNo(idNo);
         setModalShow(true);
     }
 
@@ -47,7 +48,7 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
                         <div key={`food` + index} className="activityWrap" >
                             <div className="activity" id={`searchResult-`+ index} onClick={onOpenmodal}>
                                 <div className="image">
-                                    <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'} onError={defaultImg}></img>
+                                    <img src={loadingImgae(item.Picture.PictureUrl1)} alt='loading' onError={defaultImg}></img>
                                 </div>
                                 <div className="name">
                                     {item.Name}
@@ -68,7 +69,7 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
                 const noResults = () => {
                     return(
                         <div className="noResults">
-                            <img src={require('../images/Union.png').default}></img>
+                            <img alt="no result" src={require('../images/Union.png').default}></img>
                             <div className="vertical">
                                 <p>Oop!</p>                                
                                 <p>很抱歉，找不到符合此搜尋相關的內容。</p>
@@ -85,7 +86,7 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
             catch(error){
                     return (
                         <div className="noResults">
-                            <img src={require('../images/Union.png').default}></img>
+                            <img alt="no result" src={require('../images/Union.png').default}></img>
                             <div className="vertical">
                                 <p>Oop!</p>                                
                                 <p>很抱歉，找不到符合此搜尋相關的內容。</p>

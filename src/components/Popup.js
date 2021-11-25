@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
 
-const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
+const Popup = (props) => {
 
-    useEffect(() => {}
-    ,[modalDataNo]);
+    useEffect(() => {
+        console.log('props.modalData',props.modalData);
+    }
+    ,[props.modalShow,props.modalDataNo]);
 
     const [pageCount , setPageCount] = useState(1);
     let picLimit = 1;
     let currentSrc= "";
 
     try{
-        currentSrc = content.data[modalDataNo].Picture[`PictureUrl${pageCount}`];
-        picLimit = Object.keys(content.data[modalDataNo].Picture).length / 2;
+        currentSrc = props.content.data[props.modalDataNo].Picture[`PictureUrl${pageCount}`];
+        picLimit = Object.keys(props.content.data[props.modalDataNo].Picture).length / 2;
 
     }
     catch(error){
@@ -20,8 +23,9 @@ const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
    
 
     const closeModal = () => {
-        setModalShow(false);
+        props.setModalShow(false);
         setPageCount(1);
+        console.log(props.modalData)
     }
 
     const nextPic = () => {   
@@ -44,7 +48,7 @@ const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
 
     try{
         return (
-            <div className="popWrap" style={{visibility: modalShow ? `visible`:`hidden`}}>
+            <div className="popWrap" style={{visibility: props.modalShow ? `visible`:`hidden`}}>
                 <div className="container">
                     <div className="photo">
                         <img alt="" src={currentSrc}></img>
@@ -57,16 +61,16 @@ const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
                             <div className="next"></div>
                         </div>                    
                     </div>
-                    <div className="name">{content.data[modalDataNo].Name}</div>
-                    <div className="description">{content.data[modalDataNo].Description}</div>
+                    <div className="name">{props.content.data[props.modalDataNo].Name}</div>
+                    <div className="description">{props.content.data[props.modalDataNo].Description}</div>
                     <div className="infoWrap">
                         <div className="infoA">
-                            <div className="openingHour"><img alt="" src={require('../images/time.png').default}></img>{content.data[modalDataNo].EndTime}</div>
-                            <div className="address"><img alt="" src={require('../images/Subtract.png').default}></img>{content.data[modalDataNo].Location}</div>
+                            <div className="openingHour"><img alt="" src={require('../images/time.png').default}></img>{props.content.data[props.modalDataNo].EndTime}</div>
+                            <div className="address"><img alt="" src={require('../images/Subtract.png').default}></img>{props.content.data[props.modalDataNo].Location}</div>
                         </div>
                         <div className="infoB">
                             <div className="ticketPrice"><img alt="" src={require('../images/ticket.png').default}></img>免費</div>
-                            <div className="tel"><img alt="" src={require('../images/tel.png').default}></img>{content.data[modalDataNo].Phone}</div>
+                            <div className="tel"><img alt="" src={require('../images/tel.png').default}></img>{props.content.data[props.modalDataNo].Phone}</div>
                         </div>
                     </div>
                 </div>
@@ -78,4 +82,8 @@ const Popup = ({food, content, modalShow, setModalShow, modalDataNo}) => {
     }
 }
 
-export default Popup;
+const mapStateToProps = (state) => {
+    return {modalData: state.modalData}
+}
+
+export default connect(mapStateToProps)(Popup);

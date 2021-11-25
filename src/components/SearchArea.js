@@ -84,17 +84,12 @@ const SearchArea = ({path, content, setContent, food, setFood, currentCity, setC
             setFood({});
         }
 
-
-        if(term){
             if(path === "/"){
                 spotSearch();
             }else if(path === "/food&hotel"){
                 foodSearch();
             }
-            
-        }else{
-            noTermResult();
-        }
+
     }
 
 

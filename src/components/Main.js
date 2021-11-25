@@ -20,7 +20,7 @@ const Main = ({content, food, setModalShow, setModalDataNo, setCurrentCity, show
             <div style={{display: showMainPage ? "block":"none"}}>
                 <Activity content={content} food={food} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} ></Activity>
             </div>
-            <div className="SeatchResult" style={{display: showMainPage ? "none":"block"}}>
+            <div className="SearchResult" style={{display: showMainPage ? "none":"block"}}>
                 <SearchResult content={content} food={food} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} finalCity={finalCity}></SearchResult>
             </div>
         </div>

@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 import CityCarousel from './CityCarousel';
+import {connect} from 'react-redux';
+import {modalClick} from '../Actions'
 
-const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, showMainPage}) => {
+
+const Activity = (props) => {
     const [carouselPage, setCarouselPage] = useState(1);
 
     const addressSlice = (address) => {
@@ -16,11 +19,12 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
     }
 
     const onOpenmodal = (e) => {
-        console.log('onclick');
-        const noPos = e.target.id.indexOf('-');
-        const idNo = e.target.id.slice(noPos + 1);
-        setModalDataNo(idNo);
-        setModalShow(true);
+        // const noPos = e.target.id.indexOf('-');
+        // const idNo = e.target.id.slice(noPos + 1);
+        // setModalDataNo(idNo);
+        console.log('food', props.food);
+         props.modalClick(props.food);
+         props.setModalShow(true);
     }
 
     const defaultImg = (event) => {
@@ -36,15 +40,15 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
     }
 
     useEffect(() => {
-        console.log('Effectfood= ', food);
-        console.log('Effectcontent= ', content);
+        console.log('Effectfood= ', props.food);
+        console.log('Effectcontent= ', props.content);
         
-    }, [content, food]);
+    }, [props.content, props.food]);
 
     
     const renderActivity = () => {
         try{
-            const render = content.data.map((item, index) => {
+            const render = props.content.data.map((item, index) => {
                 return(
                     <div key={`activity` + index} className="activityWrap">
                         <div className="activity">
@@ -86,7 +90,7 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
 
     const renderSmallActivity = () => {
         try{
-            const render = food.data.map((item, index) => {
+            const render = props.food.data.map((item, index) => {
                 return(
                     <div key={`food` + index} className="activityWrap">
                         <div className="activity"  onClick={onOpenmodal}>
@@ -116,7 +120,7 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
  
     const renderSearchResult = () => {
             try{
-                const results = food.data.map((item, index) => {
+                const results = props.food.data.map((item, index) => {
                     return(
                         <div key={`food` + index} className="activityWrap">
                             <div className="activity">
@@ -155,7 +159,7 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
     } 
 
 
-    if(food !== {}){
+    if(props.food !== {}){
         return (
             <div>
                 <div className="mainCity">
@@ -167,8 +171,8 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
                         熱門城市
                     </div>
                     <div className="activities">
-                        <CityCarousel type={1} carouselPage={carouselPage} setCurrentCity={setCurrentCity}></CityCarousel>
-                        <CityCarousel type={2} carouselPage={carouselPage} setCurrentCity={setCurrentCity}></CityCarousel>
+                        <CityCarousel type={1} carouselPage={carouselPage} setCurrentCity={props.setCurrentCity}></CityCarousel>
+                        <CityCarousel type={2} carouselPage={carouselPage} setCurrentCity={props.setCurrentCity}></CityCarousel>
                     </div>
                     <div className="carouselIconNext" style={{display: carouselPage === 2 ? 'none': 'block'}} onClick={() => {setCarouselPage(2)}}>
                         <div className="next"></div>
@@ -199,4 +203,8 @@ const Activity = ({content, food, setModalShow, setModalDataNo, setCurrentCity, 
 
 }
 
-export default Activity;
+const mapStateToProps = (state) => {
+    return {data: state.selectedRoute}
+}
+
+export default connect(mapStateToProps, {modalClick})(Activity);
