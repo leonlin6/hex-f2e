@@ -41,28 +41,28 @@ const App = () => {
     };
     
     const [content, setContent] = useState(defaultData);
-    const [food, setFood] = useState(null);
+    const [searchResultData, setSearchResultData] = useState(null);
     const [modalShow, setModalShow] = useState(false);
     const [modalDataNo, setModalDataNo] = useState(0);
     const [currentCity, setCurrentCity] = useState('');
     const [showMainPage, setShowMainPage] = useState(true);
     const [citySelected, setCitySelected] = useState('不分縣市');
-    const [finalCity, setFinalCity] = useState('不分縣市');
+    const [cityTitle, setCityTitle] = useState('不分縣市');
 
     return (
         <div style={{backgroundColor:`#F6F7FB`}}>
             <Route path="/">
                 <Nav setShowMainPage={setShowMainPage}></Nav>
-                <SearchArea path="/" content={content} setContent={setContent} food={food} setFood={setFood} currentCity={currentCity} setCurrentCity={setCurrentCity} setShowMainPage={setShowMainPage} citySelected={citySelected} setCitySelected={setCitySelected} setFinalCity={setFinalCity}></SearchArea>
-                <Main content={content} setContent={setContent} food={food} setFood={setFood} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} citySelected={citySelected} showMainPage={showMainPage} finalCity={finalCity}></Main>
-                <Popup food={food} content={content} modalShow={modalShow} setModalShow={setModalShow} modalDataNo={modalDataNo}></Popup>
+                <SearchArea path="/" content={content} setContent={setContent} searchResultData={searchResultData} setSearchResultData={setSearchResultData} currentCity={currentCity} setCurrentCity={setCurrentCity} setShowMainPage={setShowMainPage} citySelected={citySelected} setCitySelected={setCitySelected} setCityTitle={setCityTitle}></SearchArea>
+                <Main content={content} setContent={setContent} searchResultData={searchResultData} setSearchResultData={setSearchResultData} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} citySelected={citySelected} showMainPage={showMainPage} cityTitle={cityTitle}></Main>
+                <Popup searchResultData={searchResultData} content={content} modalShow={modalShow} setModalShow={setModalShow} modalDataNo={modalDataNo}></Popup>
                 <Footer></Footer> 
             </Route>
             <Route path="/food&hotel">
                 <Nav ></Nav>
-                <SearchArea path="/food&hotel" content={content} setContent={setContent} food={food} setFood={setFood} currentCity={currentCity} setCurrentCity={setCurrentCity} setShowMainPage={setShowMainPage} citySelected={citySelected} setCitySelected={setCitySelected} setFinalCity={setFinalCity}></SearchArea>
-                <Main mainPageOff={false} content={content} setContent={setContent} food={food} setFood={setFood} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} citySelected={citySelected} showMainPage={showMainPage} setShowMainPage={setShowMainPage} finalCity={finalCity}></Main>
-                <Popup food={food} content={content} modalShow={modalShow} setModalShow={setModalShow} modalDataNo={modalDataNo}></Popup>
+                <SearchArea path="/food&hotel" content={content} setContent={setContent} searchResultData={searchResultData} setSearchResultData={setSearchResultData} currentCity={currentCity} setCurrentCity={setCurrentCity} setShowMainPage={setShowMainPage} citySelected={citySelected} setCitySelected={setCitySelected} setCityTitle={setCityTitle}></SearchArea>
+                <Main mainPageOff={false} content={content} setContent={setContent} searchResultData={searchResultData} setSearchResultData={setSearchResultData} setModalShow={setModalShow} setModalDataNo={setModalDataNo} setCurrentCity={setCurrentCity} citySelected={citySelected} showMainPage={showMainPage} setShowMainPage={setShowMainPage} cityTitle={cityTitle}></Main>
+                <Popup searchResultData={searchResultData} content={content} modalShow={modalShow} setModalShow={setModalShow} modalDataNo={modalDataNo}></Popup>
                <Footer></Footer> 
             </Route>
             <Route path="/transportation">

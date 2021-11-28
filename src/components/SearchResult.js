@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 
-const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) => {  
+const SearchResult = ({content, searchResultData, setModalShow, setModalDataNo, cityTitle}) => {  
+
+    const clickRef = useRef(null);
 
     const addressSlice = (address) => {
         try{
@@ -15,13 +17,10 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
         }
     }
 
-    const onOpenmodal = (e) => {
-     
+    const onOpenmodal = (e) => {     
         const noPos = e.target.id.indexOf('-');
-        const idNo = e.target.id.slice(noPos + 1);
-        console.log('noPos', noPos);
-        console.log('idNo', idNo);
-        // setModalDataNo(idNo);
+        const idNo = e.target.id.slice(noPos + 1); 
+        setModalDataNo(idNo);
         setModalShow(true);
     }
 
@@ -37,16 +36,16 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
         }
     }
 
-    useEffect(() => {        
-    }, [content, food]);
+    useEffect(() => {
+    }, [content, searchResultData]);
 
  
     const renderSearchResult = () => {
             try{
-                const results = food.data.map((item, index) => {
+                const results = searchResultData.data.map((item, index) => {
                     return(
-                        <div key={`food` + index} className="activityWrap" >
-                            <div className="activity" id={`searchResult-`+ index} onClick={onOpenmodal}>
+                        <div key={`searchResultData` + index} className="activityWrap" >
+                            <div className="activity" ref={clickRef} id={`searchResult-`+ index} onClick={onOpenmodal}>
                                 <div className="image">
                                     <img src={loadingImgae(item.Picture.PictureUrl1)} alt='loading' onError={defaultImg}></img>
                                 </div>
@@ -78,7 +77,7 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
                     );
                 }
 
-                if(food.data.length === 0){
+                if(searchResultData.data.length === 0){
                     return noResults();
                 }
                 return results;
@@ -97,13 +96,13 @@ const SearchResult = ({content, food, setModalShow, setModalDataNo, finalCity}) 
     } 
 
     // Render Here
-    if(food !== {}){
+    if(searchResultData !== {}){
         return (
             <div>   
                 <div className="searchResults">
                     <div className="title">
                         <div className="icon"> </div>
-                        {finalCity}
+                        {cityTitle}
                     </div>
                     <div className="activities">
                         {renderSearchResult()}

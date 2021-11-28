@@ -957,7 +957,6 @@ template {
 }
 
 .mainActivities .activities .activityWrap .activity {
-  cursor: pointer;
   position: relative;
   width: 522px;
   height: 242px;
@@ -1143,15 +1142,18 @@ template {
 }
 
 .mainFood .activities .activityWrap .activity .image {
+  pointer-events: none;
   margin-right: 16px;
 }
 
 .mainFood .activities .activityWrap .activity .image img {
+  pointer-events: none;
   width: 182px;
   height: 137px;
 }
 
 .mainFood .activities .activityWrap .activity .location {
+  pointer-events: none;
   margin-top: 9.5px;
   color: #007350;
   font-weight: 300;
@@ -1165,11 +1167,16 @@ template {
 }
 
 .mainFood .activities .activityWrap .activity .name {
+  pointer-events: none;
   line-height: 21px;
   font-size: 16px;
   margin-top: 10px;
   width: 181px;
   height: 63px;
+}
+
+.mainFood .activities .activityWrap .activity .location {
+  pointer-events: none;
 }
 
 .mainFood .activities .activityWrap .activity .location img {
@@ -1299,6 +1306,7 @@ template {
 }
 
 .searchResults .activities .activityWrap .activity {
+  cursor: pointer;
   position: relative;
   width: 206px;
   z-index: 3;
@@ -1317,15 +1325,18 @@ template {
 }
 
 .searchResults .activities .activityWrap .activity .image {
+  pointer-events: none;
   margin-right: 16px;
 }
 
 .searchResults .activities .activityWrap .activity .image img {
+  pointer-events: none;
   width: 182px;
   height: 137px;
 }
 
 .searchResults .activities .activityWrap .activity .location {
+  pointer-events: none;
   margin-top: 9.5px;
   color: #007350;
   font-weight: 300;
@@ -1339,6 +1350,7 @@ template {
 }
 
 .searchResults .activities .activityWrap .activity .name {
+  pointer-events: none;
   line-height: 21px;
   font-size: 16px;
   margin-top: 10px;
@@ -1346,7 +1358,12 @@ template {
   height: 63px;
 }
 
+.searchResults .activities .activityWrap .activity .location {
+  pointer-events: none;
+}
+
 .searchResults .activities .activityWrap .activity .location img {
+  pointer-events: none;
   margin-right: 6px;
 }
 
@@ -1542,7 +1559,15 @@ template {
   margin-bottom: 22px;
   line-height: 21px;
   overflow: auto;
-  scrollbar-arrow-color: red;
+}
+
+.popWrap .container .description::-webkit-scrollbar {
+  width: 5px;
+  background-color: #F5F5F5;
+}
+
+.popWrap .container .description::-webkit-scrollbar-thumb {
+  background-color: #FF1D6C;
 }
 
 .popWrap .container .infoWrap {
@@ -1864,6 +1889,11 @@ template {
           align-items: center;
   margin: 0px auto;
   padding: 13.5px 0px;
+}
+
+.transContainer .routeSwitch .ToContainer .To .stopName {
+  color: #FF1D6C;
+  margin-left: 10px;
 }
 
 .transContainer .routeSwitch .ToContainer.active {

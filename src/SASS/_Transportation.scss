@@ -142,6 +142,10 @@
                 align-items: center;
                 margin: 0px auto;
                 padding: 13.5px 0px;
+                .stopName{
+                    color:$attractionsTheme;
+                    margin-left:10px;
+                }
             }
             &.active{
                 border-bottom: 4px solid $attractionsTheme;            
@@ -266,3 +270,4 @@
         }
     }
 }
+

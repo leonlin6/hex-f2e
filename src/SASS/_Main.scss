@@ -176,7 +176,6 @@
             margin-bottom:48px;
             margin-right: 9px;
             .activity{   
-                cursor: pointer;
                 position:relative;  
                 width: 522px;
                 height: 242px;
@@ -310,14 +309,17 @@
                 justify-content: space-between;
                 flex-direction: column;    
                 padding:16px;     
-                .image{
+                .image{                    
+                    pointer-events: none;
                     margin-right:16px;
-                    img{
+                    img{                        
+                        pointer-events: none;
                         width: 182px;
                         height:137px;
                     }
                 }
-                .location{
+                .location{                    
+                    pointer-events: none;
                     margin-top: 9.5px;
                     color:#007350;
                     font-weight: 300;
@@ -326,6 +328,7 @@
                     align-items: center;
                 }
                 .name{
+                    pointer-events: none;
                     line-height:21px;
                     font-size: 16px;
                     margin-top: 10px;
@@ -333,6 +336,7 @@
                     height: 63px;
                 }
                 .location{
+                    pointer-events: none;
                     img{
                         margin-right:6px;                            
                     }
@@ -434,6 +438,7 @@
                 margin-right: 0px;
             }
             .activity{   
+                cursor: pointer;
                 position:relative;  
                 width: 206px;
                 z-index: 3;
@@ -443,13 +448,16 @@
                 flex-direction: column;    
                 padding:16px;     
                 .image{
+                    pointer-events: none;
                     margin-right:16px;
                     img{
+                        pointer-events: none;
                         width: 182px;
                         height:137px;
                     }
                 }
                 .location{
+                    pointer-events: none;
                     margin-top: 9.5px;
                     color:#007350;
                     font-weight: 300;
@@ -458,6 +466,7 @@
                     align-items: center;
                 }
                 .name{
+                    pointer-events: none;
                     line-height:21px;
                     font-size: 16px;
                     margin-top: 10px;
@@ -465,7 +474,9 @@
                     height: 63px;
                 }
                 .location{
+                    pointer-events: none;
                     img{
+                        pointer-events: none;
                         margin-right:6px;                            
                     }
                 }

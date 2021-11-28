@@ -23,7 +23,7 @@ const Dropdown = ({option, selected, onSelectedChange}) =>{
     );
 
     const renderedOptions = option.map((option, index) => { 
-        if(index === 0){
+        if(option === "類別"){
             return null;
         }
         if(option === selected){

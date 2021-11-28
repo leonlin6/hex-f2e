@@ -8,12 +8,36 @@ export const selectRoute = (route) => {
     });
 }
 
-export const modalClick = (data) => {
-    console.log('action data', data);
+export const setModalData = (data, dataType) => {
     //Return an action
     return({
-        type: 'MODAL_CLICK',
-        payload:data
+        type: 'SET_MODAL_DATA',
+        payload:data,
+        dataType: dataType
     });
 }
 
+export const setModalType = (type) => {
+    //Return an action
+    return({
+        type: 'SET_MODAL_TYPE',
+        dataType: type
+    });
+}
+
+export const setModalHotActivityData = (data, dataType) => {
+    return({
+        type: 'SET_HOT_ACTIVITY',
+        payload:data,
+        dataType: dataType
+    });
+}
+
+
+export const setModalHotRestaurantData = (data, dataType) => {
+    return({
+        type: 'SET_HOT_RESTAURANT',
+        payload:data,
+        dataType: dataType
+    });
+}

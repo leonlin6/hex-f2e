@@ -18,7 +18,8 @@ export const CityTranslate = {
     苗栗縣:'MiaoliCounty',
     彰化縣:'ChanghuaCounty',
     雲林縣:'YunlinCounty',
-    嘉義市:'Chiayi'     
+    嘉義市:'Chiayi',
+    不分縣市:''     
 }
 
 export const CityOptions = [

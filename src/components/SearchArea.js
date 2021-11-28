@@ -1,46 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import searchIcon from '../images/Combined-Shape.png';
-import classIcon from '../images/Vector.png';
 import Dropdown from './Dropdown';
 import {apiScenicspotGet, apiActivityGet, apiHotActivityGet, apiHotRestaurantGet, apiHotelGet, apiRestaurantGet} from '../APIs/APIs';
+import {CityTranslate, CityOptions} from '../components/CityTranslate';
+import {connect} from 'react-redux';
+import {setModalData, setModalHotActivityData, setModalHotRestaurantData} from '../Actions'
 
-const SearchArea = ({path, content, setContent, food, setFood, currentCity, setCurrentCity, setShowMainPage, citySelected, setCitySelected, setFinalCity}) => {
+const SearchArea = (props) => {
  
 
     const classOptionSpot = ['類別','景點','活動'];
     const classOptionFood = ['類別','美食','住宿'];
     const cityOption = ['不分縣市','臺北市','新北市','桃園市','臺中市','臺南市','高雄市','基隆市','新竹市','新竹縣','苗栗縣','彰化縣','南投縣','雲林縣','嘉義縣','屏東縣','宜蘭縣','花蓮縣','臺東縣','金門媽祖澎湖'];
 
-    const translate = {
-        臺北市:'Taipei',
-        新北市:'NewTaipei',
-        桃園市:'Taoyuan',
-        新竹市:'Hsinchu',        
-        臺中市:'Taichung',
-        南投縣:'NantouCounty',
-        嘉義縣:'Chiayi',
-        臺南市:'Tainan',
-        高雄市:'Kaohsiung',
-        屏東縣 :'PingtungCounty',
-        宜蘭縣:'YilanCounty',
-        花蓮縣:'HualienCounty',
-        臺東縣:'TaitungCounty',
-        金門媽祖澎湖:'KinmenCounty',
-        基隆市:'Keelung',
-        新竹縣:'HsinchuCounty',
-        苗栗縣:'MiaoliCounty',
-        彰化縣:'ChanghuaCounty',
-        雲林縣:'YunlinCounty',
-        嘉義市:'Chiayi'
-       }
 
     const [term, setTerm] = useState('');
     const [classSelected, setClassSelected] = useState(classOptionSpot[0]);
 
     useEffect(() => {
         homePageAPI();
-    },[currentCity]);
-
+    },[props.currentCity]);
 
 
     const onSelectedChange = (option) => {
@@ -48,67 +27,70 @@ const SearchArea = ({path, content, setContent, food, setFood, currentCity, setC
     }
 
     const onSelectedChangeII = (option) => {
-        setCitySelected(option);
+        props.setCitySelected(option);
     }
 
+    const homePageAPI = async () => {   
+        const hotActivites = await apiHotActivityGet(props.currentCity);
+        const hotRestaurant = await apiHotRestaurantGet(props.currentCity);
 
+        props.setModalHotActivityData(hotActivites,'hotActivity');
+        props.setModalHotRestaurantData(hotRestaurant,'hotRestaurant');
+
+        props.setContent(hotActivites);
+        props.setSearchResultData(hotRestaurant); 
+    }    
+    
     const onClickSearch = () => {  
-        setShowMainPage(false);  
-        setFinalCity(citySelected);
+        props.setCityTitle(props.citySelected);
 
         const spotSearch = async () => {
             if(classSelected === '景點'){                
-                const activity = await apiScenicspotGet(translate[citySelected], term);
-                setFood(activity);
+                const spot = await apiScenicspotGet(CityTranslate[props.citySelected], term);                
+                props.setShowMainPage(false);  
+                props.setSearchResultData(spot);               
+                props.setModalData(spot , "spot");
             }
             
             if(classSelected === '活動'){
-                const spot = await apiActivityGet(translate[citySelected], term);
-                setFood(spot);
+                const activity = await apiActivityGet(CityTranslate[props.citySelected], term);
+                props.setShowMainPage(false);  
+                props.setSearchResultData(activity);
+                props.setModalData(activity, "activity");
             }
         }
 
         const foodSearch = async () => {
             if(classSelected === '美食'){                
-                const activity = await apiRestaurantGet(translate[citySelected], term);
-                setFood(activity);
+                const restaurant = await apiRestaurantGet(CityTranslate[props.citySelected], term);
+                props.setShowMainPage(false);  
+                props.setSearchResultData(restaurant);
+                props.setModalData(restaurant, "restaurant");
             }
             
             if(classSelected === '住宿'){
-                const spot = await apiHotelGet(translate[citySelected], term);
-                setFood(spot);
+                const hotel = await apiHotelGet(CityTranslate[props.citySelected], term);
+                props.setShowMainPage(false);  
+                props.setSearchResultData(hotel);
+                props.setModalData(hotel, "hotel");
             }
         }
 
         const noTermResult = () => {
-            setFood({});
+            props.setSearchResultData({});
         }
 
-            if(path === "/"){
-                spotSearch();
-            }else if(path === "/food&hotel"){
-                foodSearch();
-            }
 
+        if(props.path === "/"){
+            spotSearch();
+        }else if(props.path === "/food&hotel"){
+            foodSearch();
+        }
     }
-
-
-    const homePageAPI = () => {           
-        const contact = async() => {
-            const hotActivites = await apiHotActivityGet(currentCity);
-            const hotRestaurant = await apiHotRestaurantGet(currentCity);
-
-            setContent(hotActivites);
-            setFood(hotRestaurant); 
-        }
-        contact();       
-    }    
 
     const onChangeEvent = event => {
         setTerm(event.target.value);        
     }
-
-
 
     return (
         <div className="container"> 
@@ -132,8 +114,8 @@ const SearchArea = ({path, content, setContent, food, setFood, currentCity, setC
                         </div>
                         <div className="classArea">
                             <div className="classSearch">
-                                <Dropdown label='類別' option={path === "/food&hotel" ? classOptionFood : classOptionSpot} selected={classSelected} onSelectedChange={onSelectedChange}></Dropdown>
-                                <Dropdown label='不分縣市' option={cityOption}  selected={citySelected}  onSelectedChange={onSelectedChangeII}></Dropdown>         
+                                <Dropdown label='類別' option={props.path === "/food&hotel" ? classOptionFood : classOptionSpot} selected={classSelected} onSelectedChange={onSelectedChange}></Dropdown>
+                                <Dropdown label='不分縣市' option={cityOption}  selected={props.citySelected}  onSelectedChange={onSelectedChangeII}></Dropdown>         
                             </div>
                             {/* <span className="searchIcon"><img alt="" src={classIcon}></img></span> */}
                         </div>
@@ -149,4 +131,8 @@ const SearchArea = ({path, content, setContent, food, setFood, currentCity, setC
     
 }
 
-export default SearchArea;
+const mapStateToProps = (state) => {
+    return {data: state.selectedRoute}
+}
+
+export default connect(mapStateToProps, {setModalData,setModalHotActivityData, setModalHotRestaurantData})(SearchArea);

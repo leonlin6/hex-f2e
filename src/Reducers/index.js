@@ -1,8 +1,41 @@
 import { combineReducers } from "redux";
 
 const modalDataReducer = (modalData = {}, action) => {
-    if(action.type === 'MODAL_CLICK'){
-        return action.payload
+    if(action.type === 'SET_MODAL_DATA'){
+        return {
+            data: action.payload,
+            dataType:action.dataType
+        }
+    }else{
+        return modalData;
+    }
+}
+
+const modalTypeReducer = (modalType = "", action) => {
+    if(action.type === 'SET_MODAL_TYPE'){
+        return action.dataType;
+    }
+
+    return modalType;
+}
+
+const hotActivityDataReducer = (modalData = {}, action) => {
+    if(action.type === 'SET_HOT_ACTIVITY'){
+        return {
+            data: action.payload,
+            dataType:action.dataType
+        }
+    }else{
+        return modalData;
+    }
+}
+
+const hotRestaurantDataReducer = (modalData = {}, action) => {
+    if(action.type === 'SET_HOT_RESTAURANT'){
+        return {
+            data: action.payload,
+            dataType:action.dataType
+        }
     }else{
         return modalData;
     }
@@ -18,5 +51,8 @@ const selectedRouteReducer = (selectedRoute = 0, action) => {
 
 export default combineReducers({
     selectedRoute: selectedRouteReducer,
-    modalData:modalDataReducer
+    modalData:modalDataReducer,
+    hotRestaurantData: hotRestaurantDataReducer,
+    hotActivityData: hotActivityDataReducer,
+    modalType:modalTypeReducer
 });

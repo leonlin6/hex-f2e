@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import subtrcatIcon from '../images/Subtract.png';
 import CityCarousel from './CityCarousel';
+import {setModalType} from '../Actions'
 import {connect} from 'react-redux';
-import {modalClick} from '../Actions'
-
 
 const Activity = (props) => {
     const [carouselPage, setCarouselPage] = useState(1);
@@ -18,18 +17,18 @@ const Activity = (props) => {
         }
     }
 
-    const onOpenmodal = (e) => {
-        // const noPos = e.target.id.indexOf('-');
-        // const idNo = e.target.id.slice(noPos + 1);
-        // setModalDataNo(idNo);
-        console.log('food', props.food);
-         props.modalClick(props.food);
-         props.setModalShow(true);
+    const onOpenmodal = (e, type) => {
+        const noPos = e.target.id.indexOf('-');
+        const idNo = e.target.id.slice(noPos + 1);
+
+        props.setModalDataNo(idNo);
+        props.setModalShow(true);
+        props.setModalType(type);
     }
 
-    const defaultImg = (event) => {
-        event.target.src = require('../images/no-image.jpg').default;
-    }
+    // const defaultImg = (event) => {
+    //     event.target.src = require('../images/no-image.jpg').default;
+    // }
 
     const loadingImgae = (src) => {
         if(!src){
@@ -40,10 +39,8 @@ const Activity = (props) => {
     }
 
     useEffect(() => {
-        console.log('Effectfood= ', props.food);
-        console.log('Effectcontent= ', props.content);
         
-    }, [props.content, props.food]);
+    }, [props.content, props.searchResultData]);
 
     
     const renderActivity = () => {
@@ -67,7 +64,7 @@ const Activity = (props) => {
                                         <img alt="subtrcat Icon" src={subtrcatIcon}></img>
                                         {item.Location}
                                     </div>
-                                    <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={onOpenmodal}>
+                                    <div key={`content`+ index} id={`content-`+ index} className="infomation" onClick={(e) => {onOpenmodal(e ,'hotActivity')}}>
                                         活動詳情
                                     </div>
                                 </div>
@@ -90,12 +87,12 @@ const Activity = (props) => {
 
     const renderSmallActivity = () => {
         try{
-            const render = props.food.data.map((item, index) => {
+            const render = props.searchResultData.data.map((item, index) => {
                 return(
-                    <div key={`food` + index} className="activityWrap">
-                        <div className="activity"  onClick={onOpenmodal}>
+                    <div key={`searchResultData` + index} className="activityWrap">
+                        <div className="activity"  id={`searchResult-`+ index} onClick={(e) => {onOpenmodal(e, 'smallActivity')}} >
                             <div className="image">
-                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'} onError={defaultImg}></img>
+                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'}></img>
                             </div>
                             <div className="name">
                                 {item.Name}
@@ -118,48 +115,8 @@ const Activity = (props) => {
         }
     }
  
-    const renderSearchResult = () => {
-            try{
-                const results = props.food.data.map((item, index) => {
-                    return(
-                        <div key={`food` + index} className="activityWrap">
-                            <div className="activity">
-                                <div className="image">
-                                    <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'} onError={defaultImg}></img>
-                                </div>
-                                <div className="name">
-                                    {item.Name}
-                                </div>
-                                <div className="location">
-                                    <img alt="subtrcat Icon" src={subtrcatIcon}></img>
-                                    {addressSlice(item.Address)}
-                                </div>
-                            </div>
-                            <div className="searchShadow">
-                                <div className="shadow"></div>
-                                <div className="shadow"></div>
-                            </div>
-                        </div>
-                    );
-                });  
-
-                return results;
-            }
-            catch(error){
-                    return (
-                        <div className="noResults">
-                            <img src={require('../images/Union.png').default}></img>
-                            <div className="vertical">
-                                <p>Oop!</p>                                
-                                <p>很抱歉，找不到符合此搜尋相關的內容。</p>
-                            </div> 
-                        </div>
-                    );              
-            }
-    } 
-
-
-    if(props.food !== {}){
+    // return 首頁的預設畫面
+    if(props.searchResultData !== {}){
         return (
             <div>
                 <div className="mainCity">
@@ -204,7 +161,9 @@ const Activity = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return {data: state.selectedRoute}
+    return {
+        modalType:state.modalType  
+    }
 }
 
-export default connect(mapStateToProps, {modalClick})(Activity);
+export default connect(mapStateToProps, {setModalType})(Activity);

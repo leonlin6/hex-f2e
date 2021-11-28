@@ -93,7 +93,6 @@ const Transportation = (props) => {
     //點選dropdown option後打API搜尋route options & change city dropdown showing text
     const onSearchRouteNum = async (city) => {      
         const routeData = await apiBusRouteGet(CityTranslate[city]);
-        console.log(routeData);
         const busNumbers = routeData.data.map((item) => {
             return {
                 name:item.RouteName.Zh_tw,
@@ -184,10 +183,10 @@ const Transportation = (props) => {
                 </div>
                 <div className="routeSwitch">
                     <div className={props.route === 0 ? `ToContainer active` : `ToContainer`} onClick={() => { props.selectRoute(0)}}>
-                        <div className="To">往 {destination}</div>
+                        <span className="To">往 <span className="stopName">{destination}</span></span>
                     </div>
                     <div className={props.route === 1 ? `ToContainer active` : `ToContainer`} onClick={() => { props.selectRoute(1)}}>
-                        <div className="To">往 {departure}</div>
+                        <span className="To">往 <span className="stopName">{departure}</span></span>
                     </div>
                 </div>
             </div>
