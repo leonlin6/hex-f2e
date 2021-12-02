@@ -18,7 +18,6 @@ const getAuthorizationHeader = () => {
 const scenicspotGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot',
     params: {
-        $top: 20,
         $format:'JSON'
     }
 
@@ -27,7 +26,6 @@ const scenicspotGet = axios.create({
 const activityGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity',
     params: {
-        $top: 20,
         $format:'JSON'
     }
 
@@ -36,7 +34,6 @@ const activityGet = axios.create({
 const restaurantGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant',
     params: {
-        $top: 20,
         $format:'JSON'
     }
 
@@ -45,7 +42,6 @@ const restaurantGet = axios.create({
 const hotelGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel',
     params: {
-        $top: 20,
         $format:'JSON'
     }
 
@@ -63,7 +59,7 @@ const hotActivityGet = axios.create({
 const hotRestaurantGet = axios.create({
     baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant',
     params: {
-        $top: 7,
+        $top: 10,
         $format:'JSON'
     }
 

@@ -33,7 +33,6 @@ export const setModalHotActivityData = (data, dataType) => {
     });
 }
 
-
 export const setModalHotRestaurantData = (data, dataType) => {
     return({
         type: 'SET_HOT_RESTAURANT',
@@ -41,3 +40,11 @@ export const setModalHotRestaurantData = (data, dataType) => {
         dataType: dataType
     });
 }
+
+export const setCurrentPage = (page) => {
+    return({
+        type: 'SET_CURRENT_PAGE',
+        page:page
+    });
+}
+

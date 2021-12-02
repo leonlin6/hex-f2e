@@ -42,7 +42,9 @@ const Activity = (props) => {
         
     }, [props.content, props.searchResultData]);
 
-    
+
+
+
     const renderActivity = () => {
         try{
             const render = props.content.data.map((item, index) => {
@@ -92,7 +94,7 @@ const Activity = (props) => {
                     <div key={`searchResultData` + index} className="activityWrap">
                         <div className="activity"  id={`searchResult-`+ index} onClick={(e) => {onOpenmodal(e, 'smallActivity')}} >
                             <div className="image">
-                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'Picture'}></img>
+                                <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'actvity'}></img>
                             </div>
                             <div className="name">
                                 {item.Name}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import searchIcon from '../images/Combined-Shape.png';
 import Dropdown from './Dropdown';
 import {apiScenicspotGet, apiActivityGet, apiHotActivityGet, apiHotRestaurantGet, apiHotelGet, apiRestaurantGet} from '../APIs/APIs';
-import {CityTranslate, CityOptions} from '../components/CityTranslate';
+import {CityTranslate} from '../components/CityTranslate';
 import {connect} from 'react-redux';
 import {setModalData, setModalHotActivityData, setModalHotRestaurantData} from '../Actions'
 
@@ -43,7 +43,6 @@ const SearchArea = (props) => {
     
     const onClickSearch = () => {  
         props.setCityTitle(props.citySelected);
-
         const spotSearch = async () => {
             if(classSelected === '景點'){                
                 const spot = await apiScenicspotGet(CityTranslate[props.citySelected], term);                
@@ -76,9 +75,7 @@ const SearchArea = (props) => {
             }
         }
 
-        const noTermResult = () => {
-            props.setSearchResultData({});
-        }
+
 
 
         if(props.path === "/"){
@@ -132,7 +129,9 @@ const SearchArea = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    return {data: state.selectedRoute}
+    return {
+        data: state.selectedRoute
+    }
 }
 
 export default connect(mapStateToProps, {setModalData,setModalHotActivityData, setModalHotRestaurantData})(SearchArea);

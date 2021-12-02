@@ -23,44 +23,58 @@ const Transportation = (props) => {
         return `${min} : ${sec < 10 ? '0'+sec : sec}`;
     }
 
-    const renderBusItem = (busStop) => {
-        let CT = "";
-        
-        arrivalInfo.forEach((ite) => {
-            if(ite.Direction === 0 && ite.EstimateTime === undefined){
-                CT = '未發車';
-            }               
+ 
 
-            if(ite.Direction === 0 && ite.StopName === busStop.Zh_tw && ite.EstimateTime){                
-                CT = ite.EstimateTime < 60 ? '進站中' : countEstimateTime(ite.EstimateTime);
-            }               
+    const renderBusItem = (busStop, busUID) => {
+        let CT = "";
+        arrivalInfo.forEach((ite, idx) => {
+                        
+            if(ite.Direction === 0 && ite.StopName === busStop.Zh_tw){        
+                CT = countEstimateTime(ite.EstimateTime); 
+               
+            }   
+
+            if(ite.Direction === 0 && ite.StopName === busStop.Zh_tw && ite.EstimateTime === undefined){
+                CT = '未發車';
+                return ;
+            }    
+
+            if(ite.Direction === 0 && ite.StopName === busStop.Zh_tw && ite.EstimateTime < 5){                
+                CT =  '離站中';
+                return ;
+            } 
+
+            if(ite.Direction === 0 && ite.StopName === busStop.Zh_tw && ite.EstimateTime < 60){                
+                CT =  '進站中';
+                return ;
+            }
         })
 
         switch(CT){
             case '未發車' :
                 return(
-                    <div key={busStop.Zh_tw} className="routeItem">
+                    <div key={busUID} className="routeItem">
                         <div className="timeOut">{CT}</div>
                         <div className="sign">{busStop.Zh_tw}</div>
                     </div>
                 );
             case '進站中' : 
                 return(
-                    <div key={busStop.Zh_tw} className="routeItem">
+                    <div key={busUID} className="routeItem">
                         <div className="timeArrive">{CT}</div>
                         <div className="sign">{busStop.Zh_tw}</div>
                     </div>
                 );
             case '離站中' : 
                 return(
-                    <div key={busStop.Zh_tw} className="routeItem">
+                    <div key={busUID} className="routeItem">
                         <div className="timeLeave">{CT}</div>
                         <div className="sign">{busStop.Zh_tw}</div>
                     </div>
                 );
             default :
                 return(
-                    <div key={busStop.Zh_tw} className="routeItem">
+                    <div key={busUID} className="routeItem">
                         <div className="time">{CT}</div>
                         <div className="sign">{busStop.Zh_tw}</div>
                     </div>
@@ -68,17 +82,76 @@ const Transportation = (props) => {
         }
     }
 
+    const renderReverseBusItem = (busStop, busUID) => {
+        let CT = "";
+
+        arrivalInfo.forEach((ite) => {                        
+            if(ite.Direction === 1 && ite.StopName === busStop.Zh_tw){        
+                CT = countEstimateTime(ite.EstimateTime); 
+            }   
+
+            if(ite.Direction === 1 && ite.StopName === busStop.Zh_tw && ite.EstimateTime === undefined){
+                CT = '未發車';
+                return ;
+            }               
+            
+            if(ite.Direction === 1 && ite.StopName === busStop.Zh_tw && ite.EstimateTime < 5){                
+                CT =  '離站中';
+                return ;
+            }     
+            
+            if(ite.Direction === 1 && ite.StopName === busStop.Zh_tw && ite.EstimateTime < 60){                
+                CT =  '進站中';
+                return ;
+            }
+       
+        })
+
+      
+        switch(CT){
+            
+            case '未發車' :
+                return(
+                    <div key={busUID} className="routeItem">
+                        <div className="timeOut">{CT}</div>
+                        <div className="sign">{busStop.Zh_tw}</div>
+                    </div>
+                );
+            case '進站中' : 
+                return(
+                    <div key={busUID} className="routeItem">
+                        <div className="timeArrive">{CT}</div>
+                        <div className="sign">{busStop.Zh_tw}</div>
+                    </div>
+                );
+            case '離站中' : 
+                return(
+                    <div key={busUID} className="routeItem">
+                        <div className="timeLeave">{CT}</div>
+                        <div className="sign">{busStop.Zh_tw}</div>
+                    </div>
+                );
+            default :
+                return(
+                    <div key={busUID} className="routeItem">
+                        <div className="time">{CT}</div>
+                        <div className="sign">{busStop.Zh_tw}</div>
+                    </div>
+                );
+        }
+    }
+
+
     const renderBusStop = busStops.map((item) => {
-        return renderBusItem(item);
+        return renderBusItem(item.stopName, item.stopUID);
     });
 
     const renderBusStopReverse = busStopsReverse.map((item) => {
-        return renderBusItem(item);
+        return renderReverseBusItem(item.stopName, item.stopUID);
     });
 
     const estimateArrivalTime = (data) => {
-
-        return data.map((item) => {
+         const mapData = data.map((item) => {
             return {
                 Direction:  item.Direction,
                 StopName:  item.StopName.Zh_tw,
@@ -86,6 +159,7 @@ const Transportation = (props) => {
             }
         });
 
+        return mapData;
     }
 
 
@@ -100,7 +174,6 @@ const Transportation = (props) => {
             }
         });
 
-
         setRouteSelected('選擇路線');
         setCitySelected(city);
         setBusNumOptions(busNumbers);
@@ -114,7 +187,7 @@ const Transportation = (props) => {
 
     //點選search button後，打API搜尋bus stop info & rerender
     const onSearchBusStop = async () => {
-
+        // 停止上一次的interval
         clearInterval(inervalID);
        
         if(citySelected === "選擇縣市")
@@ -130,38 +203,37 @@ const Transportation = (props) => {
         setDeparture(routeInfo.data[0].DepartureStopNameZh);
         setDestination(routeInfo.data[0].DestinationStopNameZh);
         setArrivalInfo(estimateArrivalTime(estimateData.data));
-        
-        const renewId = setInterval( async () => {
-            busStopData =  await apiBusStopGet(CityTranslate[citySelected], routeSelected);
-            routeInfo =  await apiBusRouteInfoGet(CityTranslate[citySelected], routeSelected);
-            estimateData = await apiBusStopTimeOfArrivalGet(CityTranslate[citySelected], routeSelected);
 
-            setDeparture(routeInfo.data[0].DepartureStopNameZh);
-            setDestination(routeInfo.data[0].DestinationStopNameZh);            
-            setArrivalInfo(estimateArrivalTime(estimateData.data));
-           
-      
-        }, 15000);
-        setIntervalID(renewId);
-
-
+        //儲存bus stop的資訊
         if(busStopData !== null){
             const stops = busStopData.data.map((item) => {
                 return item.Stops.map((stop) => {
-                        return stop.StopName;
-                    });            
+                    return {
+                        stopName: stop.StopName,
+                        stopUID: stop.StopUID
+                    }
+                });            
             });
-
             setBusStops(stops[0]);
             setBusStopsReverse(stops[1]);
         }
+
+        //每15秒更新一次bus stop時間
+        const renewId = setInterval( async () => {
+            estimateData = await apiBusStopTimeOfArrivalGet(CityTranslate[citySelected], routeSelected);
+            setArrivalInfo(estimateArrivalTime(estimateData.data));
+        }, 15000);
+        
+        // 儲存這次的id，下次click後清除舊的interval
+        setIntervalID(renewId);
+
     }
 
     const getCountHeight = () => {
         if(props.route === 0 ){
-            return ((busStops.length / 2 ) * 65 + 256 ) + 'px';
+            return (Math.round(busStops.length / 2 ) * 65 + 256 ) + 'px';
         }else{
-            return ((busStopsReverse.length / 2 ) * 65 + 256 ) + 'px';
+            return (Math.round(busStopsReverse.length / 2 ) * 65 + 256 ) + 'px';
         }
     }
 
@@ -176,8 +248,7 @@ const Transportation = (props) => {
                                 <DropdownTrans option={CityOptions} selected={citySelected}  onSelectedChange={onSearchRouteNum}></DropdownTrans>
                                 <DropdownTrans option={busNumOptions} selected={routeSelected} onSelectedChange={onRouteClick}></DropdownTrans>         
                             </div>
-                            <div className="searchIcon" onClick={onSearchBusStop} ><img alt=""  src={require('../images/Combined-Shape.png').default}></img></div>
-                            
+                            <div className="searchIcon" onClick={onSearchBusStop} ><img alt="" src={require('../images/Combined-Shape.png').default}></img></div>                            
                         </div>
                     </div>
                 </div>

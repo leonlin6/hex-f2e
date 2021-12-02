@@ -49,10 +49,19 @@ const selectedRouteReducer = (selectedRoute = 0, action) => {
 };
 
 
+const currentPageReducer = (currentPage = 1, action) => {
+    if(action.type === 'SET_CURRENT_PAGE'){
+        return action.page
+    }
+    return currentPage;
+};
+
+
 export default combineReducers({
     selectedRoute: selectedRouteReducer,
     modalData:modalDataReducer,
     hotRestaurantData: hotRestaurantDataReducer,
     hotActivityData: hotActivityDataReducer,
-    modalType:modalTypeReducer
+    modalType:modalTypeReducer,
+    currentPage:currentPageReducer
 });

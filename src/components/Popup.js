@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 
 const Popup = (props) => {
-    // const [currentModalData , setCurrentModalData] = useState([]);
     const [searchResultData , setSearchResultData] = useState([]);
     const [hotActivityData , setHotActivityData] = useState([]);
     const [pageCount , setPageCount] = useState(1);
@@ -29,7 +28,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.ActivityName,
                             description:item.Description,
-                            location:item.Location    
+                            location:item.Location,
+                            phone:'無電話',
+                            opentime:item.StartTime.slice(0,10) + '~' + item.EndTime.slice(0,10),
+                            charge:'免費入場'
                         };   
                     }
                     case "hotRestaurant":{
@@ -38,7 +40,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.Name,
                             description:item.Description,
-                            location:item.Address    
+                            location:item.Address,
+                            phone:item.Phone,
+                            opentime:item.OpenTime,
+                            charge:'價格依現場時價'
                         };   
                     }      
                     case "spot":{  
@@ -47,7 +52,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.Name,
                             description:item.DescriptionDetail,
-                            location:item.City    
+                            location:item.City,
+                            opentime:item.OpenTime,
+                            phone:item.Phone,
+                            charge:'免費入場'  
                         };   
                     }        
                     case "activity":{
@@ -56,7 +64,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.ActivityName,
                             description:item.Description,
-                            location:item.Location    
+                            location:item.Location,
+                            phone:'無電話',
+                            opentime:item.StartTime.slice(0,10) + '~' + item.EndTime.slice(0,10),
+                            charge:'免費入場'
                         };   
                     }        
                     case "restaurant":{
@@ -65,7 +76,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.Name,
                             description:item.Description,
-                            location:item.Address    
+                            location:item.Address,
+                            phone:item.Phone,
+                            opentime:item.OpenTime,
+                            charge:'價格依現場時價'
                         };   
                     }        
                     case "hotel":{
@@ -74,7 +88,10 @@ const Popup = (props) => {
                             imageDescription:item.Picture.PictureDescription1,
                             name:item.Name,
                             description:item.Description,
-                            location:item.Address    
+                            location:item.Address,
+                            phone:item.Phone,
+                            opentime:'營業時間請洽電詢問',
+                            charge:'入住價格請洽電詢問'   
                         };   
                     }        
                     default:{
@@ -106,7 +123,7 @@ const Popup = (props) => {
             } 
         }
 
-    },[pageCount, props.modalDataNo]);
+    },[pageCount,  props.modalShow]);
 
     //transfer search result data
     useEffect(() => {
@@ -170,12 +187,12 @@ const Popup = (props) => {
                         <div className="description">{data[props.modalDataNo].description}</div>
                         <div className="infoWrap">
                             <div className="infoA">
-                                <div className="openingHour"><img alt="" src={require('../images/time.png').default}></img>{data[props.modalDataNo].EndTime}</div> 
+                                <div className="openingHour"><img alt="" src={require('../images/time.png').default}></img>{data[props.modalDataNo].opentime}</div> 
                                 <div className="address"><img alt="" src={require('../images/Subtract.png').default}></img>{data[props.modalDataNo].location}</div> 
                             </div>
                             <div className="infoB">
-                                <div className="ticketPrice"><img alt="" src={require('../images/ticket.png').default}></img>免費</div>
-                                <div className="tel"><img alt="" src={require('../images/tel.png').default}></img>{data[props.modalDataNo].Phone}</div>
+                                <div className="ticketPrice"><img alt="" src={require('../images/ticket.png').default}></img>{data[props.modalDataNo].charge}</div>
+                                <div className="tel"><img alt="" src={require('../images/tel.png').default}></img>{data[props.modalDataNo].phone}</div>
                             </div>
                         </div>
                     </div>
@@ -187,12 +204,9 @@ const Popup = (props) => {
 
     try{
         if(props.modalType === "hotActivity"){
-            console.log('props.modalType ', hotActivityData );
             return renderSearchResultModal(hotActivityData)                  
         }  
-        else{
-            
-            console.log('else ', searchResultData );
+        else{            
             return renderSearchResultModal(searchResultData)
         } 
     }catch(error){
