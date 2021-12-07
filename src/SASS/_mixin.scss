@@ -1,0 +1,22 @@
+@mixin pad {
+    @media(max-width: 768px){
+        @content
+    }
+}
+
+@mixin mobile {
+    @media(max-width: 414px){
+        @content
+    }
+}
+
+@mixin navIcon($theme){
+    width:34px;
+    height:34px; 
+    border-radius:999em;
+    background-color:$theme;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}

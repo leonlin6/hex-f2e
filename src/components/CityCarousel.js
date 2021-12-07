@@ -1,7 +1,7 @@
 import React from "react";
 import whiteSubtract from "../images/white-subtract.png";
 
-const CityCarousel  = ({type, carouselPage,setCurrentCity}) => {
+const CityCarousel  = ({type, setCurrentCity}) => {
 
     const onCityChange = (cityValue) => {      
         setCurrentCity(cityValue);
@@ -9,7 +9,7 @@ const CityCarousel  = ({type, carouselPage,setCurrentCity}) => {
 
     if(type === 1){
         return (
-            <div className="carouselWrap" style={{display: (type === carouselPage) ? `flex` : `none` }}>
+            <div className="carouselWrap">
                 <div className="container">
                     <div className="longItem" onClick={() => {onCityChange('Taipei')}}>
                         <div className="black-opacity"></div>
@@ -67,7 +67,7 @@ const CityCarousel  = ({type, carouselPage,setCurrentCity}) => {
         );
     }else{
         return(
-            <div className="carouselWrap" style={{display: (type === carouselPage) ? `flex` : `none` }}>
+            <div className="carouselWrap">
                 <div className="container">
                     <div className="longItem" onClick={() => {onCityChange('Tainan')}}>
                         <div className="black-opacity"></div>
@@ -123,39 +123,6 @@ const CityCarousel  = ({type, carouselPage,setCurrentCity}) => {
             </div>
         );
     }
-    // const renderCarousel = cityMapping.map((item, index) => {
-    //     if(item.page === type){
-    //         return (
-    //             <div className={item.type === 'long' ? 'longContainer':'shortContainer'}>
-    //                 <div className={item.type === 'long' ? 'longItem':'shortItem'}>
-    //                     <div className="black-opacity"></div>
-    //                     <img alt="" className="carouseImg" src={require(`../images/hot_city_${index+1}.png`).default}></img>
-    //                     <img className="icon" alt="subtrcat Icon" src={whiteSubtract}></img>
-    //                     <p>{item.cityName}</p>
-    //                 </div>
-    //             </div>                    
-    //         );
-    //     }else{
-    //         return (
-    //             <div className="container">
-    //                 <div className={item.type === 'long' ? 'longItem':'shortItem'}>
-    //                     <div className="black-opacity"></div>
-    //                     <img alt="" className="carouseImg" src={require(`../images/hot_city_${index+1}.png`).default}></img>
-    //                     <img className="icon" alt="subtrcat Icon" src={whiteSubtract}></img>
-    //                     <p>{item.cityName}</p>
-    //                 </div>
-    //             </div>         
-    //         );  
-    //     }
-    // });
-
-    // return(
-    //     <div className="carouselWrap" style={{display: (type === carouselPage) ? `flex` : `none` }}>
-    //         {renderCarousel}
-    //     </div>
-    // );
-
-
 }
 
 export default CityCarousel; 

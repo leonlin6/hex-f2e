@@ -1,5 +1,8 @@
-@import "Normalize";
+@import "normalize";
 @import "Variable";
+// mixin
+@import "mixin";
+// 主要css
 @import "Nav";
 @import "SearchArea";
 @import "Main";

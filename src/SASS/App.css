@@ -348,7 +348,7 @@ template {
 }
 
 .navWrap {
-  width: 1280px;
+  max-width: 1280px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -433,10 +433,11 @@ template {
 }
 
 .navWrap .navMap span.foodTheme .navIcon .navInsideIcon {
-  width: 11px;
-  height: 11px;
-  background-color: white;
-  margin: 11px;
+  width: 0px;
+  height: 0px;
+  border: solid;
+  border-width: 0 5.5px 9px 5.5px;
+  border-color: transparent transparent white transparent;
 }
 
 .navWrap .navMap span.foodTheme a {
@@ -484,6 +485,22 @@ template {
   font-family: "Noto Sans TC";
 }
 
+@media (max-width: 414px) {
+  .navWrap {
+    max-width: 414px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 15px 0px 13px 0px;
+  }
+}
+
+@media (max-width: 414px) {
+  .navWrap .navMap {
+    display: none;
+  }
+}
+
 .attractionsTheme a {
   color: #FF1D6C;
 }
@@ -497,7 +514,7 @@ template {
 }
 
 .container .wrap {
-  width: 1280px;
+  max-width: 1280px;
   padding: 20px;
   margin: 0px auto;
   background-color: white;

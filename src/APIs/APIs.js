@@ -1,6 +1,8 @@
 import axios from 'axios';
 import jsSHA from 'jssha';
 
+
+
 const getAuthorizationHeader = () => {
     let AppID = '9c833dc964c2452c8bfedc900230b889';
     let AppKey = '69Q4PBFhFAio3uYEJBOcuIi4jb4';
@@ -97,6 +99,7 @@ const busStopTimeOfArrivalGet = axios.create({
         $format:'JSON'
     }  
 });
+
 
 
 export const apiScenicspotGet = (city, term) => { return scenicspotGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};

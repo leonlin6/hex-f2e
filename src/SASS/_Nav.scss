@@ -1,13 +1,4 @@
-@mixin navIcon($theme){
-    width:34px;
-    height:34px; 
-    border-radius:999em;
-    background-color:$theme;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-}
+
 
 *{    
     font-family: $navFontFamily; 
@@ -15,7 +6,7 @@
 } 
 
 .navWrap{
-    width:1280px;
+    max-width:1280px;
     display:flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -52,11 +43,12 @@
             padding: 5px 10px;             
             .navIcon{
                 @include navIcon($foodTheme);
-                .navInsideIcon{
-                    width:11px;
-                    height:11px; 
-                    background-color:white;
-                    margin:11px;                    
+                .navInsideIcon{                    
+                    width:0px;
+                    height:0px; 
+                    border: solid;
+                    border-width: 0 5.5px 9px 5.5px;
+                    border-color: transparent transparent white transparent;              
                 }
             }
             
@@ -89,6 +81,22 @@
     }
     
 }
+
+.navWrap{
+    @include mobile{
+        max-width: 414px;
+        justify-content:center;
+        padding: 15px 0px 13px 0px;
+    }
+                
+    .navMap{
+        @include mobile{
+            display: none;
+        }
+    } 
+}
+
+
 
 .attractionsTheme{
     a{
