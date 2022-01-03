@@ -10,17 +10,29 @@
     background: rgba(210, 210, 210, 0.75);
     backdrop-filter: blur(28px);
     display:flex;
-    justify-content: center;
+    justify-content: center;    
+
     .container{
         width: 676px;
-        height: 810px;
+        max-height: 810px;
         padding:32px;
         margin-right:12px;
-        background: white;
+        background: white;  
+        overflow: auto;
+        @include mobile{
+           width:296px;   
+           height:644px;    
+           margin-right:0px;
+           padding:18px;
+        }
         .photo{
             img{
                width: 612px;
-               height: 459px; 
+               height: 459px;   
+               @include mobile{
+                  width:260px; 
+                  height:195px;         
+               }
             }
         }
         .changeBtn{
@@ -90,7 +102,10 @@
         .infoWrap{
             display: flex;
             flex-direction: row;
-            justify-content:space-between;
+            justify-content:space-between;   
+            @include mobile{
+                flex-direction: column;     
+            }
             .infoA{
                 display: flex;
                 justify-content:space-between;
@@ -123,7 +138,10 @@
                 flex-direction: column;
                 padding-right: 100px;
                 font-size: 14px;
-                height:70px;
+                height:70px;        
+                @include mobile{
+                    margin-top:35px;
+                 }
                 .ticketPrice{
                     display:flex;
                     align-items: center;
@@ -140,7 +158,6 @@
         }
     }
     .closeBtn{
-        display:fixed;
         height:45px;
         width:45px;
         background-color: $attractionsTheme;
@@ -150,7 +167,12 @@
         justify-content: center;
         align-items: center;
         border-radius: 8px;
-        cursor: pointer; 
+        cursor: pointer;         
+        @include mobile{
+           position: fixed;
+           right: 25px;
+           top: 50px;
+        }
         &::before{
             content:'\2716';
             font-size: 20px;

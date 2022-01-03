@@ -50,7 +50,7 @@ const Popup = (props) => {
                         return {
                             imageUrl:item.Picture,
                             imageDescription:item.Picture.PictureDescription1,
-                            name:item.Name,
+                            name:item.ScenicSpotName,
                             description:item.DescriptionDetail,
                             location:item.City,
                             opentime:item.OpenTime,
@@ -74,7 +74,7 @@ const Popup = (props) => {
                         return {
                             imageUrl:item.Picture,
                             imageDescription:item.Picture.PictureDescription1,
-                            name:item.Name,
+                            name:item.RestaurantName,
                             description:item.Description,
                             location:item.Address,
                             phone:item.Phone,
@@ -86,7 +86,7 @@ const Popup = (props) => {
                         return {
                             imageUrl:item.Picture,
                             imageDescription:item.Picture.PictureDescription1,
-                            name:item.Name,
+                            name:item.HotelName,
                             description:item.Description,
                             location:item.Address,
                             phone:item.Phone,

@@ -360,8 +360,28 @@ template {
   background-color: white;
 }
 
+@media (max-width: 414px) {
+  .navWrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .navWrap .navLogo {
   display: block;
+}
+
+@media (max-width: 414px) {
+  .navWrap .navLogo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .navWrap .navMap {
@@ -485,6 +505,60 @@ template {
   font-family: "Noto Sans TC";
 }
 
+.navWrap .mobileMap {
+  display: none;
+  width: 326px;
+  height: 40px;
+  -webkit-box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);
+          box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);
+  border-radius: 6px;
+  margin: 0px auto;
+  padding: 9.5px 31px;
+}
+
+@media (max-width: 414px) {
+  .navWrap .mobileMap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+}
+
+.navWrap .mobileMap span.attractionsTheme {
+  display: inline;
+}
+
+.navWrap .mobileMap span.attractionsTheme a {
+  color: #FF1D6C;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navWrap .mobileMap span.foodTheme {
+  display: inline;
+  margin: 0px 24px 0px 24px;
+}
+
+.navWrap .mobileMap span.foodTheme a {
+  color: #ACACAC;
+  font-size: 14px;
+  text-decoration: none;
+  font-family: "Noto Sans TC";
+}
+
+.navWrap .mobileMap span.transportationTheme {
+  display: inline;
+}
+
+.navWrap .mobileMap span.transportationTheme a {
+  color: #ACACAC;
+  text-decoration: none;
+  font-family: "Noto Sans TC";
+  font-size: 14px;
+}
+
 @media (max-width: 414px) {
   .navWrap {
     max-width: 414px;
@@ -520,6 +594,12 @@ template {
   background-color: white;
   position: relative;
   z-index: 5;
+}
+
+@media (max-width: 414px) {
+  .container .wrap {
+    display: none;
+  }
 }
 
 .container .wrap .searchWrap {
@@ -735,6 +815,12 @@ template {
   z-index: 1;
 }
 
+@media (max-width: 414px) {
+  .container .searchShadow {
+    display: none;
+  }
+}
+
 .container .searchShadow .shadow:first-child {
   position: absolute;
   top: -30px;
@@ -863,8 +949,13 @@ template {
   color: white;
 }
 
+.swiper-slide {
+  width: auto;
+  margin-right: 15px !important;
+}
+
 .mainCity {
-  width: 1280px;
+  max-width: 1280px;
   margin: 0px auto;
   margin-top: 30px;
   padding: 50px 107px 0px 107px;
@@ -873,7 +964,14 @@ template {
   position: relative;
 }
 
+@media (max-width: 414px) {
+  .mainCity {
+    padding: 16px;
+  }
+}
+
 .mainCity .carouselIconPrev {
+  display: none;
   position: absolute;
   left: 50px;
   bottom: 125px;
@@ -886,6 +984,16 @@ template {
   cursor: pointer;
 }
 
+@media (max-width: 414px) {
+  .mainCity .carouselIconPrev {
+    display: none;
+  }
+}
+
+.mainCity .carouselIconPrev .active {
+  display: block;
+}
+
 .mainCity .carouselIconPrev .prev {
   position: absolute;
   left: -2px;
@@ -895,7 +1003,38 @@ template {
   border-color: transparent black transparent transparent;
 }
 
+.mainCity .carouselIconPrev.active {
+  display: none;
+  position: absolute;
+  left: 50px;
+  bottom: 125px;
+  background-color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+          box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+  cursor: pointer;
+  display: block;
+}
+
+@media (max-width: 414px) {
+  .mainCity .carouselIconPrev.active {
+    display: none;
+  }
+}
+
+.mainCity .carouselIconPrev.active .prev {
+  position: absolute;
+  left: -2px;
+  top: 11px;
+  padding-left: 10px;
+  border: 5px solid;
+  border-color: transparent black transparent transparent;
+}
+
 .mainCity .carouselIconNext {
+  display: none;
   position: absolute;
   right: 50px;
   bottom: 125px;
@@ -908,7 +1047,42 @@ template {
   cursor: pointer;
 }
 
+@media (max-width: 414px) {
+  .mainCity .carouselIconNext {
+    display: none;
+  }
+}
+
 .mainCity .carouselIconNext .next {
+  position: absolute;
+  right: -2px;
+  top: 11px;
+  padding-left: 10px;
+  border: 5px solid;
+  border-color: transparent transparent transparent white;
+}
+
+.mainCity .carouselIconNext.active {
+  position: absolute;
+  right: 50px;
+  bottom: 125px;
+  background-color: black;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+          box-shadow: 0px 4px 3px rgba(13, 11, 12, 0.2);
+  cursor: pointer;
+  display: block;
+}
+
+@media (max-width: 414px) {
+  .mainCity .carouselIconNext.active {
+    display: none;
+  }
+}
+
+.mainCity .carouselIconNext.active .next {
   position: absolute;
   right: -2px;
   top: 11px;
@@ -933,12 +1107,18 @@ template {
 }
 
 .mainActivities {
-  width: 1280px;
+  max-width: 1280px;
   margin: 0px auto;
   margin-top: 10px;
   padding: 50px 107px 0px 107px;
   background-color: #F6F7FB;
   z-index: 1;
+}
+
+@media (max-width: 414px) {
+  .mainActivities {
+    padding: 16px 35px 16px 35px;
+  }
 }
 
 .mainActivities .title {
@@ -973,6 +1153,12 @@ template {
   margin-right: 9px;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap {
+    margin-bottom: 15px;
+  }
+}
+
 .mainActivities .activities .activityWrap .activity {
   position: relative;
   width: 522px;
@@ -985,6 +1171,13 @@ template {
   padding: 16px;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap .activity {
+    width: 298px;
+    height: 120px;
+  }
+}
+
 .mainActivities .activities .activityWrap .activity .image {
   margin-right: 16px;
 }
@@ -992,6 +1185,13 @@ template {
 .mainActivities .activities .activityWrap .activity .image img {
   width: 187px;
   height: 196px;
+}
+
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap .activity .image img {
+    width: 92px;
+    height: 96px;
+  }
 }
 
 .mainActivities .activities .activityWrap .activity .content {
@@ -1005,6 +1205,14 @@ template {
   width: 278px;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap .activity .content {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
 .mainActivities .activities .activityWrap .activity .content .name {
   font-size: 16px;
 }
@@ -1013,6 +1221,12 @@ template {
   color: #ACACAC;
   font-weight: 400;
   line-height: 21px;
+}
+
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap .activity .content .description {
+    display: none;
+  }
 }
 
 .mainActivities .activities .activityWrap .activity .content .description p {
@@ -1064,9 +1278,21 @@ template {
   cursor: pointer;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .activityWrap .activity .content .detailArea .infomation {
+    display: none;
+  }
+}
+
 .mainActivities .activities .searchShadow {
   width: 522px;
   position: relative;
+}
+
+@media (max-width: 414px) {
+  .mainActivities .activities .searchShadow {
+    width: 298px;
+  }
 }
 
 .mainActivities .activities .searchShadow .shadow:first-child {
@@ -1083,6 +1309,12 @@ template {
   border-width: 52px 520px 0 0;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .searchShadow .shadow:first-child {
+    border-width: 52px 298px 0 0;
+  }
+}
+
 .mainActivities .activities .searchShadow .shadow:last-child {
   position: absolute;
   z-index: 2;
@@ -1097,12 +1329,24 @@ template {
   border-width: 0px 520px 52px 0;
 }
 
+@media (max-width: 414px) {
+  .mainActivities .activities .searchShadow .shadow:last-child {
+    border-width: 0px 298px 52px 0px;
+  }
+}
+
 .mainFood {
-  width: 1280px;
+  max-width: 1280px;
   margin: 0px auto;
   padding: 50px 107px;
   background-color: #F6F7FB;
   z-index: 1;
+}
+
+@media (max-width: 414px) {
+  .mainFood {
+    padding: 50px 26px;
+  }
 }
 
 .mainFood .title {
@@ -1128,6 +1372,14 @@ template {
           justify-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+@media (max-width: 414px) {
+  .mainFood .activities {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
 }
 
 .mainFood .activities .activityWrap {
@@ -1158,6 +1410,12 @@ template {
   padding: 16px;
 }
 
+@media (max-width: 414px) {
+  .mainFood .activities .activityWrap .activity {
+    width: 152px;
+  }
+}
+
 .mainFood .activities .activityWrap .activity .image {
   pointer-events: none;
   margin-right: 16px;
@@ -1167,6 +1425,13 @@ template {
   pointer-events: none;
   width: 182px;
   height: 137px;
+}
+
+@media (max-width: 414px) {
+  .mainFood .activities .activityWrap .activity .image img {
+    width: 128px;
+    height: 96px;
+  }
 }
 
 .mainFood .activities .activityWrap .activity .location {
@@ -1192,6 +1457,12 @@ template {
   height: 63px;
 }
 
+@media (max-width: 414px) {
+  .mainFood .activities .activityWrap .activity .name {
+    width: 128px;
+  }
+}
+
 .mainFood .activities .activityWrap .activity .location {
   pointer-events: none;
 }
@@ -1203,6 +1474,12 @@ template {
 .mainFood .activities .searchShadow {
   width: 206px;
   position: relative;
+}
+
+@media (max-width: 414px) {
+  .mainFood .activities .searchShadow {
+    width: 128px;
+  }
 }
 
 .mainFood .activities .searchShadow .shadow:first-child {
@@ -1219,6 +1496,12 @@ template {
   border-width: 52px 206px 0 0;
 }
 
+@media (max-width: 414px) {
+  .mainFood .activities .searchShadow .shadow:first-child {
+    border-width: 52px 128px 0 0;
+  }
+}
+
 .mainFood .activities .searchShadow .shadow:last-child {
   position: absolute;
   z-index: 2;
@@ -1231,6 +1514,12 @@ template {
   border-color: transparent #0D0B0C transparent transparent;
   border-style: solid;
   border-width: 0px 206px 52px 0;
+}
+
+@media (max-width: 414px) {
+  .mainFood .activities .searchShadow .shadow:last-child {
+    border-width: 0px 128px 52px 0;
+  }
 }
 
 .mainFood .activities .noResults {
@@ -1575,15 +1864,32 @@ template {
 
 .popWrap .container {
   width: 676px;
-  height: 810px;
+  max-height: 810px;
   padding: 32px;
   margin-right: 12px;
   background: white;
+  overflow: auto;
+}
+
+@media (max-width: 414px) {
+  .popWrap .container {
+    width: 296px;
+    height: 644px;
+    margin-right: 0px;
+    padding: 18px;
+  }
 }
 
 .popWrap .container .photo img {
   width: 612px;
   height: 459px;
+}
+
+@media (max-width: 414px) {
+  .popWrap .container .photo img {
+    width: 260px;
+    height: 195px;
+  }
 }
 
 .popWrap .container .changeBtn {
@@ -1670,6 +1976,15 @@ template {
           justify-content: space-between;
 }
 
+@media (max-width: 414px) {
+  .popWrap .container .infoWrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .popWrap .container .infoWrap .infoA {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1731,6 +2046,12 @@ template {
   height: 70px;
 }
 
+@media (max-width: 414px) {
+  .popWrap .container .infoWrap .infoB {
+    margin-top: 35px;
+  }
+}
+
 .popWrap .container .infoWrap .infoB .ticketPrice {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1755,7 +2076,6 @@ template {
 }
 
 .popWrap .closeBtn {
-  display: fixed;
   height: 45px;
   width: 45px;
   background-color: #FF1D6C;
@@ -1772,6 +2092,14 @@ template {
           align-items: center;
   border-radius: 8px;
   cursor: pointer;
+}
+
+@media (max-width: 414px) {
+  .popWrap .closeBtn {
+    position: fixed;
+    right: 25px;
+    top: 50px;
+  }
 }
 
 .popWrap .closeBtn::before {

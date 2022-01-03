@@ -11,9 +11,17 @@
     justify-content: space-between;
     margin: 0 auto;
     padding: 29px 108px 18px 108px ;
-    background-color: white;
+    background-color: white;    
+    @include mobile{
+        flex-direction: column;
+    }
     .navLogo{
         display: block;
+        @include mobile{
+            display: flex;
+            justify-content: center;
+        
+        }
     }
     .navMap{    
         display: block;      
@@ -79,7 +87,51 @@
             }   
         }
     }
-    
+    .mobileMap{    
+        display: none;      
+        width:326px;
+        height:40px;
+        box-shadow: 0px 2px 4px rgba(13, 11, 12, 0.2);
+        border-radius: 6px;
+        margin: 0px auto;
+        padding: 9.5px 31px;
+        @include mobile{
+            display: flex;            
+            justify-content:space-around;
+        }
+        span.attractionsTheme{
+            display: inline;   
+            // padding: 5px 10px;            
+
+            a{
+                color: $attractionsTheme;
+                text-decoration: none;    
+                font-size: 14px;
+            }   
+        }
+        span.foodTheme{
+            display: inline;   
+            // padding: 5px 10px;             
+            margin: 0px 24px 0px 24px;
+            a{
+                color: #ACACAC;
+                font-size: 14px;
+                text-decoration: none;     
+                font-family: $navFontFamily;
+            }   
+        }
+        span.transportationTheme{
+            display: inline;   
+            // padding: 5px 10px;            
+
+            a{
+                color: #ACACAC;
+                text-decoration: none;      
+                font-family: $navFontFamily;
+                font-size: 14px;   
+            }   
+        }
+    }   
 }
 
 .navWrap{

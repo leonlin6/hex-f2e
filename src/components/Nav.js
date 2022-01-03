@@ -29,6 +29,17 @@ const Nav = ({setShowMainPage}) => {
                     <a href="/transportation">景點交通</a>
                 </span>
             </div>
+            <div className="mobileMap">
+                <span className="attractionsTheme">
+                    <a href="/">台灣景點</a>
+                </span>
+                <span className="foodTheme">  
+                    <a href="/food&hotel">美食住宿</a>
+                </span>
+                <span className="transportationTheme">
+                    <a href="/transportation">景點交通</a>
+                </span>
+            </div>
         </div>
     );
     

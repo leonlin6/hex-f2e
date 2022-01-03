@@ -130,7 +130,7 @@ const Activity = (props) => {
                                 <img src={loadingImgae(item.Picture.PictureUrl1)} alt={'actvity'}></img>
                             </div>
                             <div className="name">
-                                {item.Name}
+                                {item.RestaurantName}
                             </div>
                             <div className="location">
                                 <img alt="subtrcat Icon" src={subtrcatIcon}></img>
@@ -155,7 +155,7 @@ const Activity = (props) => {
         return (
             <div>
                 <div className="mainCity">
-                    <div className="carouselIconPrev" style={{display: carouselPage === 1 ? 'none': 'block'}} onClick={() => {prevSwiper()}}>
+                    <div className={carouselPage === 1 ? 'carouselIconPrev': 'carouselIconPrev active'} onClick={() => {prevSwiper()}}>
                         <div className="prev"></div>
                     </div>
                     <div className="title">
@@ -167,20 +167,20 @@ const Activity = (props) => {
                             ref={ref}
                             // install Swiper modules
                             // modules={[Navigation, Pagination, Scrollbar, A11y]}
-                            // spaceBetween={128}
-                            // slidesPerView={1}
+                            spaceBetween={128}
+                            slidesPerView='auto'
                             // navigation
                             // pagination={{ clickable: true }}
                             // scrollbar={{ draggable: true }}
                             // onSwiper={(swiper) => console.log(swiper)}
+                            freeMode={true}
                             onSlideChange={() => {onChangeSwiperSetSliderPage()}}
                             >
-                            <SwiperSlide><CityCarousel type={1} setCurrentCity={props.setCurrentCity}></CityCarousel></SwiperSlide>
+                            <SwiperSlide><CityCarousel type={1} setCurrentCity={props.setCurrentCity}></CityCarousel></SwiperSlide> 
                             <SwiperSlide><CityCarousel type={2} setCurrentCity={props.setCurrentCity}></CityCarousel></SwiperSlide>
-
                         </Swiper>
                     </div>
-                    <div className="carouselIconNext" style={{display: carouselPage === 2 ? 'none': 'block'}} onClick={() => {nextSwiper()}}>
+                    <div className={carouselPage === 2 ? 'carouselIconNext': 'carouselIconNext active'} onClick={() => {nextSwiper()}}>
                         <div className="next"></div>
                     </div>
                 </div>                

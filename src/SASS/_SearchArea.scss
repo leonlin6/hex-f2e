@@ -1,5 +1,8 @@
 .container{
     .wrap{
+        @include mobile{
+            display: none;
+        }
         max-width:1280px;
         padding:20px;
         margin: 0px auto;
@@ -162,6 +165,9 @@
         }
     }
     .searchShadow{
+        @include mobile{
+            display:none;
+        }
         position: relative;
         justify-content: space-between;
         width: 1280px;    

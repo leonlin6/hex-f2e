@@ -143,6 +143,9 @@ const SearchResult = (props) => {
             props.setCurrentPage(props.currentPage + 1 );
     }
 
+
+
+
     const renderSearchResult = () => {
             try{
                 const results = props.searchResultData.data.map((item, index) => {
@@ -154,7 +157,10 @@ const SearchResult = (props) => {
                                         <img src={loadingImgae(item.Picture.PictureUrl1)} alt='loading' onError={defaultImg}></img>
                                     </div>
                                     <div className="name">
-                                        {item.Name}
+                                        {item.ScenicSpotName}
+                                        {item.RestaurantName}
+                                        {item.HotelName}
+                                        {item.ActivityName}
                                     </div>
                                     <div className="location">
                                         <img alt="subtrcat Icon" src={subtrcatIcon}></img>

@@ -102,10 +102,10 @@ const busStopTimeOfArrivalGet = axios.create({
 
 
 
-export const apiScenicspotGet = (city, term) => { return scenicspotGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
-export const apiActivityGet = (city, term) => { return activityGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
-export const apiRestaurantGet = (city, term) => { return restaurantGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
-export const apiHotelGet = (city, term) => { return hotelGet.get(`/${city}?$filter=contains(Name,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiScenicspotGet = (city, term) => { return scenicspotGet.get(`/${city}?$filter=contains(ScenicSpotName,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiActivityGet = (city, term) => { return activityGet.get(`/${city}?$filter=contains(ActivityName,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiRestaurantGet = (city, term) => { return restaurantGet.get(`/${city}?$filter=contains(RestaurantName,'${term}')`, {headers:getAuthorizationHeader()})};
+export const apiHotelGet = (city, term) => { return hotelGet.get(`/${city}?$filter=contains(HotelName,'${term}')`, {headers:getAuthorizationHeader()})};
 export const apiHotActivityGet = (city) => { return hotActivityGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`, {headers:getAuthorizationHeader()})};
 export const apiHotRestaurantGet = (city) => { return hotRestaurantGet.get(`/${city}?$filter=Picture/PictureUrl1 ne null`, {headers:getAuthorizationHeader()})};
 export const apiBusRouteGet = (city) => { return busRouteGet.get(`/${city}`, {headers:getAuthorizationHeader()})};
